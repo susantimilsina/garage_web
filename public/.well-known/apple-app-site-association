@@ -1,0 +1,14 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "74YXVWLRGR.com.garageyard.garageyardsale",
+        "paths": ["/sale/*"]
+      }
+    ]
+  },
+  "webcredentials": {
+    "apps": ["74YXVWLRGR.com.garageyard.garageyardsale"]
+  }
+}
