@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.garageyard.garageyardsale",
+      "sha256_cert_fingerprints": [
+        "6E:BC:9C:EC:50:59:A3:23:9B:4B:EE:B2:93:01:59:14:5D:1C:AF:FD:F2:8C:18:61:4B:11:EF:51:D3:F1:51:B2"
+      ]
+    }
+  }
+]

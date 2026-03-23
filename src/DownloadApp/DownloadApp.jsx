@@ -3,99 +3,82 @@ import app_store from "../assets/app_store.png";
 import qr_code from "../assets/qr_code.jpg";
 import { APP_STORE_URL, PLAY_STORE_URL } from "../common/constants";
 
-const containerStyle = {
-  maxWidth: "48rem",
-  margin: "1rem auto",
-  width: "100%",
-};
-
-const wrapperStyle = {
-  position: "relative",
-  paddingBottom: "56.25%", // 16:9 Aspect Ratio
-  height: 0,
-  overflow: "hidden",
-};
-
-const iframeStyle = {
-  position: "absolute",
-  top: 0,
-  left: 0,
-  width: "100%",
-  height: "100%",
-  borderRadius: "0.375rem",
-  border: "none",
-};
-
 const DownloadApp = () => {
   return (
-    <div className="container mx-auto">
-      <div className=" bg-brand-light-orange p-6 md:p-10 rounded-lg px-4">
-        <div className=" container flex flex-col md:flex-col md:items-center md:justify-center gap-8 md:gap-4">
-          {/* Left section with text and store buttons */}
-          <div className="text-center md:text-left">
-            <div className="text-4xl md:text-4xl sm:text-xl font-bold text-brand-brown mb-2">
+    <section
+      id="get_the_app"
+      className="bg-brand-blue py-16 md:py-20"
+      aria-labelledby="download-heading"
+    >
+      <div className="max-w-7xl mx-auto px-4 md:px-6">
+        <div className="grid grid-cols-1 lg:grid-cols-[1.25fr_1fr] gap-10 lg:gap-14 items-center">
+          {/* Video – larger column */}
+          <div className="relative w-full aspect-video rounded-xl overflow-hidden bg-black/20 order-1">
+            <iframe
+              title="Find Garage and Yard Sale app demo video"
+              src="https://player.vimeo.com/video/1042070258?dnt=1&title=0&byline=0&portrait=0&sidedock=0&color=ffffff"
+              className="absolute top-0 left-0 w-full h-full border-0 rounded-xl"
+              allow="autoplay"
+            />
+          </div>
+
+          {/* Combined: Text, Buttons & QR Code */}
+          <div className="flex flex-col items-center lg:items-start text-center lg:text-left order-2">
+            <h2
+              id="download-heading"
+              className="text-2xl md:text-3xl font-bold text-white font-merriweather mb-4"
+            >
               Download this App Today!
-            </div>
-            <p className="text-xl text-brand-brown mb-4 font-rethink">
-              Buy and sell your items Easily, Safely, and Quickly.
+            </h2>
+            <p className="text-lg text-white/90 font-rethink mb-6 max-w-md mx-auto lg:mx-0">
+              Buy and sell your items easily, safely, and quickly. Find garage
+              sales near you or post your own.
             </p>
-            {/* Store buttons container */}
-            <div className="flex flex-col sm:flex-row items-center sm:items-center justify-center gap-4 sm:gap-4">
+            <div className="flex flex-col sm:flex-row items-center lg:items-start justify-center lg:justify-start gap-4 mb-8">
               <a
                 href={PLAY_STORE_URL}
-                className="transform hover:scale-105 transition-transform"
                 target="_blank"
+                rel="noopener noreferrer"
+                className="hover:opacity-90 transition-opacity"
               >
                 <img
                   src={play_store}
-                  alt="Get it on Google Play"
-                  className="h-10 w-auto object-contain"
+                  alt="Get Find Garage and Yard Sale on Google Play"
+                  className="h-12 w-auto object-contain"
                 />
               </a>
               <a
                 href={APP_STORE_URL}
-                className="transform hover:scale-105 transition-transform"
                 target="_blank"
+                rel="noopener noreferrer"
+                className="hover:opacity-90 transition-opacity"
               >
                 <img
                   src={app_store}
-                  alt="Download on the App Store"
-                  className="h-10 w-auto object-contain"
+                  alt="Download Find Garage and Yard Sale on the App Store"
+                  className="h-12 w-auto object-contain"
                 />
               </a>
             </div>
-          </div>
-          <div style={containerStyle}>
-            <div style={wrapperStyle}>
-              <iframe
-                title="garage and yard sales"
-                src="https://player.vimeo.com/video/1042070258?dnt=1&title=0&byline=0&portrait=0&sidedock=0&color=ffffff"
-                style={iframeStyle}
-                allow="autoplay"
-              />
-            </div>
-          </div>
-          {/* Right section with QR code */}
-          <div className="flex flex-col items-center justify-center">
-            <p className="text-xl text-center text-brand-brown mb-2 font-rethink">
-              Scan Here to{" "}
-            </p>
-            <div className="relative w-32 h-32 sm:w-40 sm:h-40 md:w-45 md:h-45">
-              <img
-                src={qr_code}
-                alt="QR Code"
-                className="w-full h-full object-contain"
-              />
-            </div>
-            <div className="text-center mt-2">
-              <p className="text-xl text-brand-brown mt-1 font-rethink">
-                Find or post your garage and yard sale.
+            <div className="flex flex-col items-center lg:items-start">
+              <p className="text-white font-rethink font-medium mb-3">
+                Scan to download
+              </p>
+              <div className="bg-white p-3 rounded-xl">
+                <img
+                  src={qr_code}
+                  alt="QR code to download Find Garage and Yard Sale app"
+                  className="w-36 h-36 object-contain"
+                />
+              </div>
+              <p className="text-white/90 text-sm font-rethink mt-3 text-center lg:text-left">
+                Find or post your garage and yard sale
               </p>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

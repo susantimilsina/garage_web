@@ -1,14 +1,24 @@
 import "./App.css";
-import { createHashRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./Home/Home";
 import PrivacyPolicy from "./PrivacyPolicy/PrivacyPolicy";
 import TermsAndConditions from "./TermsAndConditions/TermsAndConditions";
 import ErrorPage from "./ErrorPage/ErrorPage";
+import SalesList from "./pages/SalesList/SalesList";
+import SaleDetail from "./pages/SaleDetail/SaleDetail";
 
-const router = createHashRouter([
+const router = createBrowserRouter([
   {
     path: "/",
     element: <Home />,
+  },
+  {
+    path: "/sales",
+    element: <SalesList />,
+  },
+  {
+    path: "/sale/:id",
+    element: <SaleDetail />,
   },
   {
     path: "/privacy-policy",

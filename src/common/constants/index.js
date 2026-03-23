@@ -1,4 +1,15 @@
+export const SITE_URL = "https://findgarageandyardsale.com";
+
+// In dev, use relative path so Vite proxy avoids CORS; in prod use full API URL
+const API_HOST =
+  import.meta.env.VITE_API_BASE_URL ??
+  (import.meta.env.DEV ? "" : "http://18.232.33.127:8000");
+export const API_BASE_URL = `${API_HOST.replace(/\/$/, "")}/api/v1`;
+export const MEDIA_BASE_URL = API_HOST.replace(/\/api\/v1.*$/, "").replace(/\/$/, "") || API_HOST;
+export const GARAGE_YARD_SALES_LIST = "/garage/yard/sales/";
+export const GARAGE_YARD_SALES_BY_ID = (id) => `/garage/yard/sales/${id}/`;
+
 export const APP_STORE_URL =
-  "https://apps.apple.com/us/app/find-garage-yard-sale/id6737464722";
+  "https://apps.apple.com/us/app/find-garage-yard-sale/id6737464722?utm_source=website&utm_medium=web";
 export const PLAY_STORE_URL =
-  "https://play.google.com/store/apps/details?id=com.garageyard.garageyardsale&referrer=utm_source%3Dapps.facebook.com%26utm_campaign%3Dfb4a%26utm_content%3D%257B%2522app%2522%253A0%252C%2522t%2522%253A1748593356%252C%2522source%2522%253Anull%257D&fbclid=IwZXh0bgNhZW0CMTAAYnJpZBExOEgzV0lXWlQ3SWJjNnpxMwEeYQw70Lvl-mD2617GzGJlYgyj3INMaK_5vDzepFkjSLn1jYUYXDm1H5qZWtQ_aem_eR8kO6I_N9Kftj3e_f6oyQ";
+  "https://play.google.com/store/apps/details?id=com.garageyard.garageyardsale&utm_source=website&utm_medium=web";

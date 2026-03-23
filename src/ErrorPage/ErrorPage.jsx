@@ -2,6 +2,7 @@ import React from "react";
 import { useRouteError, Link } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
 import Footer from "../Footer/Footer";
+import SeoHead from "../components/SeoHead/SeoHead";
 
 const ErrorPage = () => {
   const error = useRouteError();
@@ -25,6 +26,11 @@ const ErrorPage = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <SeoHead
+        title="Page Not Found - Find Garage & Yard Sale"
+        description="The page you requested could not be found."
+        noIndex
+      />
       <Navbar />
 
       <main className="flex-grow flex items-center justify-center px-6 py-24">

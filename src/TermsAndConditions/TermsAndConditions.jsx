@@ -1,15 +1,31 @@
-import React from "react";
+import { Link } from "react-router-dom";
+import SeoHead from "../components/SeoHead/SeoHead";
+import Navbar from "../Navbar/Navbar";
+import Footer from "../Footer/Footer";
 
 const TermsAndConditions = () => {
   return (
-    <div>
-      <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4">
-        <div className="bg-white shadow-lg rounded-lg max-w-4xl p-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-6">
-            Terms of Service
-          </h1>
+    <div className="min-h-screen flex flex-col bg-white">
+      <SeoHead
+        title="Terms of Service - Find Garage & Yard Sale"
+        description="Terms of Service for Find Garage and Yard Sale. Read our terms and conditions for using our services."
+        path="/terms-and-conditions"
+      />
+      <Navbar />
+      <main className="flex-grow pt-20 pb-16 px-4">
+        <div className="max-w-4xl mx-auto">
+          <Link
+            to="/"
+            className="inline-block text-brand-blue font-rethink hover:underline mb-6"
+          >
+            ← Back to Home
+          </Link>
+          <div className="bg-white rounded-xl shadow-md border border-gray-100 p-8 md:p-10">
+            <h1 className="text-2xl md:text-3xl font-bold text-brand-title-color font-merriweather mb-6">
+              Terms of Service
+            </h1>
 
-          <p className="leading-relaxed">
+            <p className="text-brand-text-color font-rethink leading-relaxed">
             Welcome to Find Garage and Yard Sale (referred to as "we," "us," or
             "our"). These Terms of Service ("Terms") govern your use of our
             mobile app, website, and services (collectively, the "Services"). By
@@ -160,8 +176,10 @@ const TermsAndConditions = () => {
               <br />
             </div>
           </div>
+          </div>
         </div>
-      </div>
+      </main>
+      <Footer />
     </div>
   );
 };

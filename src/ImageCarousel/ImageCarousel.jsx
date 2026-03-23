@@ -22,33 +22,32 @@ export default function ImageCarousel() {
   });
 
   return (
-    <div className="container">
+    <div className="w-full">
       <Swiper
         breakpoints={{
-          640: { slidesPerView: 3 },
-          768: { slidesPerView: 2 },
-          1024: { slidesPerView: 3 },
+          320: { slidesPerView: 1, spaceBetween: 16 },
+          640: { slidesPerView: 1, spaceBetween: 24 },
+          768: { slidesPerView: 2, spaceBetween: 24 },
+          1024: { slidesPerView: 3, spaceBetween: 32 },
         }}
-        spaceBetween={70}
-        className="swiper-container"
+        className="swiper-container !overflow-visible"
         pagination={{ clickable: true }}
         autoplay={{
-          delay: 1000, // Set to 2000ms for smoother transitions
+          delay: 3000,
           disableOnInteraction: false,
         }}
-        speed={2000} // Reduced speed for smoother transitions
+        speed={600}
         navigation={true}
         modules={[Pagination, Navigation, Autoplay]}
         loop={true}
         grabCursor={true}
-        style={{ width: "75%" }}
       >
         {slides.map((slide, index) => (
-          <SwiperSlide key={index}>
+          <SwiperSlide key={index} className="!h-auto">
             <img
               src={slide.url}
               alt={slide.title}
-              className="w-full rounded-[16px]"
+              className="w-full h-auto max-h-[320px] sm:max-h-[400px] md:max-h-[450px] object-fit rounded-2xl shadow-lg"
             />
           </SwiperSlide>
         ))}

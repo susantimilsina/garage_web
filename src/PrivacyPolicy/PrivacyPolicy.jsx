@@ -1,11 +1,30 @@
+import { Link } from "react-router-dom";
+import SeoHead from "../components/SeoHead/SeoHead";
+import Navbar from "../Navbar/Navbar";
+import Footer from "../Footer/Footer";
+
 const PrivacyPolicy = () => {
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4">
-      <div className="bg-white shadow-lg rounded-lg max-w-4xl p-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-6">
-          Privacy Policy
-        </h1>
-        <div>
+    <div className="min-h-screen flex flex-col bg-white">
+      <SeoHead
+        title="Privacy Policy - Find Garage & Yard Sale"
+        description="Privacy Policy for Find Garage and Yard Sale. Learn how we collect, use, and protect your information."
+        path="/privacy-policy"
+      />
+      <Navbar />
+      <main className="flex-grow pt-20 pb-16 px-4">
+        <div className="max-w-4xl mx-auto">
+          <Link
+            to="/"
+            className="inline-block text-brand-blue font-rethink hover:underline mb-6"
+          >
+            ← Back to Home
+          </Link>
+          <div className="bg-white rounded-xl shadow-md border border-gray-100 p-8 md:p-10">
+            <h1 className="text-2xl md:text-3xl font-bold text-brand-title-color font-merriweather mb-6">
+              Privacy Policy
+            </h1>
+        <div className="text-brand-text-color font-rethink leading-relaxed">
           Welcome to Find Garage and Yard Sale (referred to as "we," "us," or
           "our"). This Privacy Policy explains how we collect, use, disclose,
           and protect your personal information when you use our mobile app,
@@ -14,10 +33,10 @@ const PrivacyPolicy = () => {
           you do not agree, please do not use our Services.
         </div>
         <br />
-        <div className="font-bold">
+        <div className="font-bold text-brand-title-color font-rethink mt-6">
           I. Information We Collect and Methods of Collection{" "}
         </div>
-        <div>
+        <div className="text-brand-text-color font-rethink leading-relaxed">
           We may collect the following types of information when you use our
           Services:
         </div>
@@ -183,7 +202,10 @@ const PrivacyPolicy = () => {
           <div> Email: support@GarageandYardSale.com</div>
           <br />
         </div>
-      </div>
+          </div>
+        </div>
+      </main>
+      <Footer />
     </div>
   );
 };
