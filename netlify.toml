@@ -1,3 +1,16 @@
+# Proxy API and media to backend (avoids CORS in production)
+[[redirects]]
+  from = "/api/*"
+  to = "http://18.232.33.127:8000/api/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/media/*"
+  to = "http://18.232.33.127:8000/media/:splat"
+  status = 200
+  force = true
+
 # SPA fallback: serve index.html for all routes
 [[redirects]]
   from = "/*"
