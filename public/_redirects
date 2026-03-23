@@ -1,0 +1,8 @@
+# API proxy
+/api/*  http://18.232.33.127:8000/api/:splat  200
+
+# Media proxy
+/media/*  http://18.232.33.127:8000/media/:splat  200
+
+# SPA fallback - must be last
+/*  /index.html  200

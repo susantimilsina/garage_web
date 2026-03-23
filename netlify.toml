@@ -11,7 +11,7 @@
   status = 200
   force = true
 
-# SPA fallback: serve index.html for all routes
+# SPA fallback: serve index.html for app routes (existing files like /assets/* are served first)
 [[redirects]]
   from = "/*"
   to = "/index.html"
