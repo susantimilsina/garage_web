@@ -16,7 +16,7 @@ Landing page and sales browser for the Find Garage & Yard Sale app.
 
 ## Environment
 
-- `VITE_API_BASE_URL` – API host (default: `http://18.232.33.127:8000`)
+- `VITE_API_BASE_URL` – Optional API origin override (default production: `https://api.findgarageandyardsale.com`; dev uses Vite proxy)
 
 ## Deployment
 

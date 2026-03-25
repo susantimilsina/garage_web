@@ -1,13 +1,13 @@
 # Proxy API and media to backend (avoids CORS in production)
 [[redirects]]
   from = "/api/*"
-  to = "http://18.232.33.127:8000/api/:splat"
+  to = "https://api.findgarageandyardsale.com/api/:splat"
   status = 200
   force = true
 
 [[redirects]]
   from = "/media/*"
-  to = "http://18.232.33.127:8000/media/:splat"
+  to = "https://api.findgarageandyardsale.com/media/:splat"
   status = 200
   force = true
 

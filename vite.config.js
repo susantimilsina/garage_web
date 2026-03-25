@@ -1,7 +1,7 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
-const API_TARGET = "http://18.232.33.127:8000";
+const API_TARGET = "https://api.findgarageandyardsale.com";
 
 // https://vitejs.dev/config/
 export default defineConfig({

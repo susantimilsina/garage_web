@@ -18,17 +18,19 @@ server {
     }
 
     location /api/ {
-        proxy_pass http://18.232.33.127:8000/api/;
+        proxy_pass https://api.findgarageandyardsale.com/api/;
         proxy_http_version 1.1;
-        proxy_set_header Host $host;
+        proxy_ssl_server_name on;
+        proxy_set_header Host api.findgarageandyardsale.com;
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Proto $scheme;
     }
 
     location /media/ {
-        proxy_pass http://18.232.33.127:8000/media/;
-        proxy_set_header Host $host;
+        proxy_pass https://api.findgarageandyardsale.com/media/;
+        proxy_ssl_server_name on;
+        proxy_set_header Host api.findgarageandyardsale.com;
     }
 }
 ```
@@ -53,17 +55,17 @@ A `.htaccess` file is in `public/` and is copied to `dist/` on build. Ensure `mo
 For API proxy on Apache, add to your vhost (requires `mod_proxy`):
 
 ```apache
-ProxyPass /api http://18.232.33.127:8000/api
-ProxyPassReverse /api http://18.232.33.127:8000/api
-ProxyPass /media http://18.232.33.127:8000/media
-ProxyPassReverse /media http://18.232.33.127:8000/media
+ProxyPass /api https://api.findgarageandyardsale.com/api
+ProxyPassReverse /api https://api.findgarageandyardsale.com/api
+ProxyPass /media https://api.findgarageandyardsale.com/media
+ProxyPassReverse /media https://api.findgarageandyardsale.com/media
 ```
 
 ---
 
 ## 2. API proxy (avoiding CORS)
 
-The app uses `/api/v1/...` (relative paths). Configure your server to proxy `/api` and `/media` to the backend at `http://18.232.33.127:8000` (nginx example above).
+The app uses `/api/v1/...` (relative paths). Configure your server to proxy `/api` and `/media` to the backend at `https://api.findgarageandyardsale.com` (nginx example above).
 
 ---
 
@@ -72,10 +74,10 @@ The app uses `/api/v1/...` (relative paths). Configure your server to proxy `/ap
 If the backend has **CORS** enabled for your domain, you can skip the proxy and call the API directly. Set at build time:
 
 ```bash
-VITE_API_BASE_URL=http://18.232.33.127:8000 npm run build
+VITE_API_BASE_URL=https://api.findgarageandyardsale.com npm run build
 ```
 
-Or in your host's environment: `VITE_API_BASE_URL=http://18.232.33.127:8000`
+Or in your host's environment: `VITE_API_BASE_URL=https://api.findgarageandyardsale.com`
 
 ### Enabling CORS on the API server
 
@@ -94,7 +96,7 @@ CORS_ALLOWED_ORIGINS = [
 Then use the full API URL in production:
 
 ```bash
-VITE_API_BASE_URL=http://18.232.33.127:8000
+VITE_API_BASE_URL=https://api.findgarageandyardsale.com
 ```
 
 Or rely on the default in `src/common/constants/index.js` (same URL in production).
