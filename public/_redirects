@@ -1,3 +1,7 @@
+# Static privacy policy (full HTML for Google Play / crawlers that do not run JavaScript)
+/privacy-policy  /privacy-policy.html  200
+/privacy-policy/  /privacy-policy.html  200
+
 # API proxy
 /api/*  https://api.findgarageandyardsale.com/api/:splat  200
 

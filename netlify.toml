@@ -1,3 +1,14 @@
+# Privacy policy: static HTML (Play Store / crawlers without JS)
+[[redirects]]
+  from = "/privacy-policy"
+  to = "/privacy-policy.html"
+  status = 200
+
+[[redirects]]
+  from = "/privacy-policy/"
+  to = "/privacy-policy.html"
+  status = 200
+
 # Proxy API and media to backend (avoids CORS in production)
 [[redirects]]
   from = "/api/*"

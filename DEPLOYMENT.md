@@ -1,5 +1,24 @@
 # Production Deployment – Live Server
 
+## Privacy policy URL (Google Play)
+
+Play Console’s checker often **does not run JavaScript**. The React app only shows the policy **after** JS runs, so Google may report “could not find” the policy even when the URL works in your browser.
+
+This project ships **`/privacy-policy.html`** as a **static HTML** file (full policy text in the first response). Configure your host so **`/privacy-policy`** and **`/privacy-policy/`** serve that file (Netlify/Vercel configs in the repo already do this). On **nginx**, add **before** the generic SPA `try_files`:
+
+```nginx
+location = /privacy-policy {
+  try_files /privacy-policy.html =404;
+}
+location = /privacy-policy/ {
+  return 301 /privacy-policy.html;
+}
+```
+
+(Adjust `root` so `privacy-policy.html` resolves from your `dist` folder.)
+
+---
+
 ## 1. Fix 404 on direct URLs (/sales, /sale/123, etc.)
 
 This is a Single Page App. Routes like `/sales` and `/sale/433` don’t exist as files. The server must serve `index.html` for those paths so the React app can load and handle routing.

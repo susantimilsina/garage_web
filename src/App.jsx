@@ -25,7 +25,15 @@ const router = createBrowserRouter([
     element: <PrivacyPolicy />,
   },
   {
+    path: "/privacy-policy/",
+    element: <PrivacyPolicy />,
+  },
+  {
     path: "/terms-and-conditions",
+    element: <TermsAndConditions />,
+  },
+  {
+    path: "/terms-and-conditions/",
     element: <TermsAndConditions />,
   },
   {
