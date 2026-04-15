@@ -7,8 +7,8 @@ const TermsAndConditions = () => {
   return (
     <div className="min-h-screen flex flex-col bg-white">
       <SeoHead
-        title="Terms of Service - Find Garage & Yard Sale"
-        description="Terms of Service for Find Garage and Yard Sale. Read our terms and conditions for using our services."
+        title="Terms and Conditions - Find Garage & Yard Sale"
+        description="Terms and Conditions for Find Garage and Yard Sale. Read the rules for using our mobile app, website, and services."
         path="/terms-and-conditions"
       />
       <Navbar />
@@ -22,160 +22,175 @@ const TermsAndConditions = () => {
           </Link>
           <div className="bg-white rounded-xl shadow-md border border-gray-100 p-8 md:p-10">
             <h1 className="text-2xl md:text-3xl font-bold text-brand-title-color font-merriweather mb-6">
-              Terms of Service
+              Terms and Conditions
             </h1>
 
-            <p className="text-brand-text-color font-rethink leading-relaxed">
-            Welcome to Find Garage and Yard Sale (referred to as "we," "us," or
-            "our"). These Terms of Service ("Terms") govern your use of our
-            mobile app, website, and services (collectively, the "Services"). By
-            accessing or using our Services, you agree to these Terms. If you do
-            not agree, please stop using the Services immediately.
-          </p>
-          <br />
-          <div className="text-xl ">
-            <div className="text-base">
-              <div className="font-bold">1. Eligibility</div>
-              <br />
-              <div>To use our Services, you must:</div>
-              <ul className="list-disc pl-8">
-                <li>Be at least 16 years old.</li>
-              </ul>
-              <ul className="list-disc pl-8">
-                <li>If under 18, have parental or guardian consent.</li>
-              </ul>
-              <ul className="list-disc pl-8">
-                <li>Comply with all applicable laws and these Terms.</li>
-              </ul>
-              <br />
-              <div className="font-bold my-5">2. User Accounts</div>
-              <ul className="list-disc pl-8">
-                <li>
-                  You are responsible for maintaining the confidentiality of
-                  your account and password.
-                </li>
-              </ul>
-              <ul className="list-disc pl-8">
-                <li>
-                  Provide accurate and up-to-date information during
-                  registration.
-                </li>
-              </ul>
-              <ul className="list-disc pl-8">
-                <li>
-                  Notify us immediately of any unauthorized access to your
-                  account.
-                </li>
-              </ul>
-              <div className="font-bold my-5">3. Services Overview</div>
-              <div>Our platform allows users to:</div>
-              <ul className="list-disc pl-8">
-                <li>
-                  List items for sale for max of 3 dates which costs 10$ per
-                  post, cost is subjected to change. (e.g., garage sale items).
-                </li>
-              </ul>
-              <ul className="list-disc pl-8">
-                <li>Buy items from other users</li>
-              </ul>
-              <br />
+            <p className="text-brand-text-color font-rethink leading-relaxed mb-6">
+              Welcome to Find Garage and Yard Sale (referred to as &quot;we,&quot;
+              &quot;us,&quot; or &quot;our&quot;). These Terms and Conditions
+              (&quot;Terms&quot;) govern your use of our mobile app, website, and
+              services (collectively, the &quot;Services&quot;). By accessing or
+              using our Services, you agree to these Terms. If you do not agree,
+              please stop using the Services immediately.
+            </p>
+
+            <section className="text-brand-text-color font-rethink leading-relaxed space-y-6">
               <div>
-                Note: We are not involved in transactions between buyers and
-                sellers. All transactions are at your own risk.
+                <h2 className="font-bold text-brand-title-color text-lg mb-2">
+                  1. Eligibility
+                </h2>
+                <p className="mb-2">To use our Services, you must:</p>
+                <ul className="list-disc pl-8 space-y-1">
+                  <li>Be at least 16 years old.</li>
+                  <li>If under 18, have parental or guardian consent.</li>
+                  <li>Comply with all applicable laws and these Terms.</li>
+                </ul>
               </div>
-              <br />
-              <div className="font-bold my-3">4. Prohibited Conduct</div>
-              <div>You agree not to:</div>
-              <ul className="list-disc pl-8">
-                <li>Engage in fraudulent, misleading, or harmful behavior.</li>
-              </ul>
-              <ul className="list-disc pl-8">
-                <li>Harass, intimidate, or stalk other users.</li>
-              </ul>
-              <ul className="list-disc pl-8">
-                <li>Use the Services for unauthorized commercial purposes.</li>
-              </ul>
-              <br />
-              <div className="font-bold my-3">5. Fees and Payments</div>
-              <ul className="list-disc pl-8">
-                <li>
-                  Some features may require payment (e.g., Sale Postings costing
-                  10$ per post which can run for 3 dates).
-                </li>
-              </ul>
-              <ul className="list-disc pl-8">
-                <li>Fees are non-refundable unless otherwise stated.</li>
-              </ul>
-              <ul className="list-disc pl-8">
-                <li>
-                  You are responsible for any taxes related to your
-                  transactions.
-                </li>
-              </ul>
-              <br />
-              <div className="font-bold my-3"> 6. User Content</div>
-              <ul className="list-disc pl-8">
-                <li>
-                  You own the content you post but grant us a license to use it
-                  for operating the Services.
-                </li>
-              </ul>
-              <ul className="list-disc pl-8">
-                <li>
-                  Do not post content that violates laws, infringes on others'
-                  rights, or is harmful or offensive.
-                </li>
-              </ul>
-              <ul className="list-disc pl-8">
-                <li>We may remove content at our discretion.</li>
-              </ul>
-              <br />
-              <div className="font-bold my-3">7. Disclaimers</div>
-              <ul className="list-disc pl-8">
-                <li>
-                  The Services are provided "as is" without warranties of any
-                  kind.
-                </li>
-              </ul>
-              <ul className="list-disc pl-8">
-                <li>
-                  We do not guarantee the accuracy, reliability, or safety of
-                  user content or transactions.
-                </li>
-              </ul>
-              <ul className="list-disc pl-8">
-                <li>Use the Services at your own risk.</li>
-              </ul>
-              <br />
-              <div className="font-bold my-3">8. Limitation of Liability</div>
-              <ul className="list-disc pl-8">
-                <li>
-                  We are not liable for any indirect, incidental, or
-                  consequential damages arising from your use of the Services.
-                </li>
-              </ul>
-              <ul className="list-disc pl-8">
-                <li>
-                  Our total liability is limited to the amount you paid us in
-                  the last 12 months.
-                </li>
-              </ul>
-              <br />
-              <div className="font-bold my-3">9. Changes to Terms</div>
+
               <div>
-                We may update these Terms at any time. If we make significant
-                changes, we will notify you. Continued use of the Services after
-                changes means you accept the updated Terms.
+                <h2 className="font-bold text-brand-title-color text-lg mb-2">
+                  2. User Accounts
+                </h2>
+                <ul className="list-disc pl-8 space-y-1">
+                  <li>
+                    You are responsible for maintaining the confidentiality of your
+                    account and password.
+                  </li>
+                  <li>
+                    Provide accurate and up-to-date information during
+                    registration.
+                  </li>
+                  <li>
+                    Notify us immediately of any unauthorized access to your
+                    account.
+                  </li>
+                </ul>
               </div>
-              <br />
-              <div className="font-bold my-3">10. Contact Us</div>
-              <div className="pl-2">
-                For questions or concerns, contact us at: Email:
+
+              <div>
+                <h2 className="font-bold text-brand-title-color text-lg mb-2">
+                  3. Services Overview
+                </h2>
+                <p className="mb-2">Our platform allows users to:</p>
+                <ul className="list-disc pl-8 space-y-1">
+                  <li>
+                    Our Find Garage and Yard Sale App. Simply provides a platform
+                    to post your Garage, Yard or Estate sale event and for
+                    User/Buyer to easily navigate the local Garage, Yard or
+                    Estate sale events.
+                  </li>
+                  <li>
+                    We do not participate in any transactions between Buyers and
+                    Sellers or we do not guarantee about any seller or any items
+                    they sell.
+                  </li>
+                </ul>
               </div>
-              <div className="pl-2">support@GarageandYardSale.com</div>
-              <br />
-            </div>
-          </div>
+
+              <div>
+                <h2 className="font-bold text-brand-title-color text-lg mb-2">
+                  4. Prohibited Conduct
+                </h2>
+                <p className="mb-2">You agree not to:</p>
+                <ul className="list-disc pl-8 space-y-1">
+                  <li>
+                    Engage in fraudulent, misleading, or harmful behavior.
+                  </li>
+                  <li>Harass, intimidate, or stalk other users.</li>
+                  <li>Use the Services for unauthorized commercial purposes.</li>
+                </ul>
+              </div>
+
+              <div>
+                <h2 className="font-bold text-brand-title-color text-lg mb-2">
+                  5. Fees and Payments
+                </h2>
+                <ul className="list-disc pl-8 space-y-1">
+                  <li>
+                    At present posting is free, but we may start charging a
+                    nominal fee per posting in near future.
+                  </li>
+                </ul>
+              </div>
+
+              <div>
+                <h2 className="font-bold text-brand-title-color text-lg mb-2">
+                  6. User Content
+                </h2>
+                <ul className="list-disc pl-8 space-y-1">
+                  <li>
+                    You own the content you post and you are responsible for the
+                    wordings you used if it offensive to others.
+                  </li>
+                  <li>
+                    Do not post content that violates laws, infringes on
+                    others&apos; rights, or is harmful or offensive.
+                  </li>
+                  <li>We may remove content at our discretion.</li>
+                </ul>
+              </div>
+
+              <div>
+                <h2 className="font-bold text-brand-title-color text-lg mb-2">
+                  7. Disclaimers
+                </h2>
+                <ul className="list-disc pl-8 space-y-1">
+                  <li>
+                    The Services are provided &quot;as is&quot; without warranties
+                    of any kind.
+                  </li>
+                  <li>
+                    We do not guarantee the accuracy, reliability, or safety of
+                    user content or transactions.
+                  </li>
+                  <li>Use the Services at your own risk.</li>
+                </ul>
+              </div>
+
+              <div>
+                <h2 className="font-bold text-brand-title-color text-lg mb-2">
+                  8. Limitation of Liability
+                </h2>
+                <ul className="list-disc pl-8 space-y-1">
+                  <li>
+                    We are not liable for any indirect, incidental, or
+                    consequential damages arising from the use of our Services.
+                  </li>
+                  <li>
+                    Our total liability is limited to the amount you paid us in
+                    the last 30 days.
+                  </li>
+                </ul>
+              </div>
+
+              <div>
+                <h2 className="font-bold text-brand-title-color text-lg mb-2">
+                  9. Changes to Terms
+                </h2>
+                <p>
+                  We may update these Terms and Conditions at any time without
+                  formal notifications unless we make significant changes, we will
+                  notify you. Continued use of the Services after changes means
+                  you accept the updated Terms.
+                </p>
+              </div>
+
+              <div>
+                <h2 className="font-bold text-brand-title-color text-lg mb-2">
+                  10. Contact Us
+                </h2>
+                <p>For questions or concerns, contact us at:</p>
+                <p className="mt-2">
+                  Email:{" "}
+                  <a
+                    href="mailto:support@findgarageandyardsale.com"
+                    className="text-brand-blue hover:underline"
+                  >
+                    support@findgarageandyardsale.com
+                  </a>
+                </p>
+              </div>
+            </section>
           </div>
         </div>
       </main>
