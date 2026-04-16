@@ -8,7 +8,7 @@ const PrivacyPolicy = () => {
     <div className="min-h-screen flex flex-col bg-white">
       <SeoHead
         title="Privacy Policy - Find Garage & Yard Sale"
-        description="Privacy Policy for Find Garage and Yard Sale. Learn how we collect, use, and protect your information."
+        description="Privacy Policy for Find Garage and Yard Sale. Learn how we collect, use, disclose, and safeguard your information."
         path="/privacy-policy"
       />
       <Navbar />
@@ -21,187 +21,209 @@ const PrivacyPolicy = () => {
             ← Back to Home
           </Link>
           <div className="bg-white rounded-xl shadow-md border border-gray-100 p-8 md:p-10">
-            <h1 className="text-2xl md:text-3xl font-bold text-brand-title-color font-merriweather mb-6">
+            <h1 className="text-2xl md:text-3xl font-bold text-brand-title-color font-merriweather mb-2">
               Privacy Policy
             </h1>
-        <div className="text-brand-text-color font-rethink leading-relaxed">
-          Welcome to Find Garage and Yard Sale (referred to as "we," "us," or
-          "our"). This Privacy Policy explains how we collect, use, disclose,
-          and protect your personal information when you use our mobile app,
-          website, and services (collectively, the "Services"). By accessing or
-          using our Services, you agree to the terms of this Privacy Policy. If
-          you do not agree, please do not use our Services.
-        </div>
-        <br />
-        <div className="font-bold text-brand-title-color font-rethink mt-6">
-          I. Information We Collect and Methods of Collection{" "}
-        </div>
-        <div className="text-brand-text-color font-rethink leading-relaxed">
-          We may collect the following types of information when you use our
-          Services:
-        </div>
-        <br />
-        <div className="font-bold">a. Information You Provide</div>
-        <br />
-        <div>
-          - Account Information: Name, email address, phone number, and password
-          when you create an account.
-        </div>
-        <div>
-          - Transaction Information: Payment details (e.g., credit card
-          information) when you make a purchase or pay for a listing.
-        </div>
-        <div>
-          - User Content: Information you post, such as item descriptions,
-          photos, and sale details.
-        </div>
-        <br />
-        <div className="font-bold">
-          b. Information We Collect Automatically{" "}
-        </div>
-        <br />
-        <ul>
-          <li>
-            - Device Information: IP address, device type, operating system, and
-            browser type.
-          </li>
-        </ul>
-        <ul>
-          <li>
-            - Usage Data: Pages visited, features used, and time spent on the
-            Services.
-          </li>
-        </ul>
-        <ul>
-          <li>
-            - Location Data: Approximate location (if enabled) to help you find
-            nearby garage and yard sales.
-          </li>
-        </ul>
-        <br />
-        <div className="font-bold">c. Information from Third Parties</div>
-        <br />
-        <div>
-          We may receive information from third-party services (e.g., payment
-          processors or social media platforms) if you link your account or use
-          their services in connection with our Services.
-        </div>{" "}
-        <br />
-        <br />
-        <div className="font-bold">2. How We Use Your Information </div>
-        <br />
-        <div>We use your information for the following purposes:</div>
-        <div>- To provide, maintain, and improve our Services.</div>
-        <div>
-          - To process transactions and send transaction-related notifications.
-        </div>
-        <div>
-          - To communicate with you, including responding to inquiries and
-          sending updates.
-        </div>
-        <div>- To personalize your experience and show relevant content.</div>
-        <div>
-          - To enforce our Terms of Service and protect the security of our
-          Services.
-        </div>
-        <div>
-          {" "}
-          - To comply with legal obligations and prevent fraudulent or illegal
-          activities.
-        </div>
-        <div>
-          <br />
-          <div className="font-bold">3. How We Share Your Information</div>
-          <br />
-        </div>
-        <div>We may share your information in the following circumstances:</div>
-        <div>
-          - With Other Users: Your profile information and user content (e.g.,
-          listings) may be visible to other users.
-        </div>
-        <div>
-          - With Service Providers: Third parties who help us operate our
-          Services (e.g., payment processors, hosting providers).
-        </div>
-        <div>
-          {" "}
-          - For Legal Reasons: To comply with laws, respond to legal requests,
-          or protect our rights and safety.
-        </div>
-        <div>
-          - With Your Consent: If you give us permission to share your
-          information. We do not sell your personal information to third
-          parties.
-        </div>
-        <br />
-        <div className="font-bold">4. Data Security</div>
-        <br />
-        <div>
-          We take reasonable measures to protect your information from
-          unauthorized access, loss, or misuse. However, no method of
-          transmission or storage is completely secure, and we cannot guarantee
-          absolute security.
-        </div>
-        <div>
-          Garage and Yard Sale Inc may also share aggregated or de-identified
-          information that cannot identify you.
-        </div>
-        <br />
-        <div className="font-bold">5. Your Choices</div>
-        <br />
-        <div>
-          - Account Information: You can update or delete your account
-          information by accessing your account settings.
-        </div>
-        <div>
-          - Location Data: You can disable location services in your device
-          settings.
-        </div>
-        <div>
-          {" "}
-          - Communications: You can opt out of promotional emails by following
-          the unsubscribe link in the email.
-        </div>
-        <br />
-        <div className="font-bold">6. Children’s Privacy</div>
-        <br />
-        <div>
-          Our Services are not intended for children under 16. We do not
-          knowingly collect personal information from children under 16. If we
-          become aware of such collection, we will take steps to delete the
-          information.
-        </div>
-        <br />
-        <div className="font-bold"> 7. International Users</div>
-        <br />
-        <div>
-          If you are using our Services from outside the United States, your
-          information may be transferred to and processed in the United States,
-          where data protection laws may differ.
-        </div>
-        <br />
-        <div className="font-bold"> 8. Changes to This Privacy Policy</div>
-        <br />
-        <div>
-          <div>
-            We may update this Privacy Policy from time to time. If we make
-            significant changes, we will notify you through the Services or by
-            email. Your continued use of the Services after changes means you
-            accept the updated Privacy Policy.
-          </div>
-        </div>
-        <br />
-        <div>
-          <div className="font-bold"> 9. Contact Us</div>
+            <p className="text-sm text-brand-light-text-color font-rethink mb-8">
+              Last updated: March 28, 2026
+            </p>
 
-          <br />
-          <div>
-            If you have questions or concerns about this Privacy Policy or our
-            data practices, please contact us at:
-          </div>
-          <div> Email: support@GarageandYardSale.com</div>
-          <br />
-        </div>
+            <section className="text-brand-text-color font-rethink leading-relaxed space-y-6">
+              <div>
+                <h2 className="font-bold text-brand-title-color text-lg mb-2">
+                  1. Introduction
+                </h2>
+                <p>
+                  This Privacy Policy explains how we collect, use, disclose, and
+                  safeguard your information when you use our mobile application
+                  and related services. Please read this privacy policy carefully.
+                  If you do not agree with the terms of this privacy policy, please
+                  do not access the application.
+                </p>
+              </div>
+
+              <div>
+                <h2 className="font-bold text-brand-title-color text-lg mb-2">
+                  2. Information We Collect
+                </h2>
+                <h3 className="font-semibold text-brand-title-color mt-4 mb-2">
+                  2.1 Personal Information
+                </h3>
+                <p className="mb-2">
+                  We may collect personal information that you voluntarily provide
+                  to us when you:
+                </p>
+                <ul className="list-disc pl-8 space-y-1">
+                  <li>Register for an account</li>
+                  <li>Create an account for listing</li>
+                  <li>Contact us for support</li>
+                  <li>Participate in surveys or promotions</li>
+                </ul>
+                <h3 className="font-semibold text-brand-title-color mt-4 mb-2">
+                  2.2 Automatically Collected Information
+                </h3>
+                <p className="mb-2">
+                  We automatically collect certain information when you use our app,
+                  including:
+                </p>
+                <ul className="list-disc pl-8 space-y-1">
+                  <li>
+                    Device information (model, operating system, unique device
+                    identifiers)
+                  </li>
+                  <li>
+                    Usage data (app features used, time spent, pages viewed)
+                  </li>
+                  <li>Location data (with your permission)</li>
+                  <li>Log data (IP address, browser type, access times)</li>
+                  <li>
+                    Transaction information: Payment details (i.e. credit card
+                    information) when you pay for your listings.
+                  </li>
+                  <li>
+                    User content: Information you post, such as item descriptions,
+                    photos and sale details.
+                  </li>
+                </ul>
+              </div>
+
+              <div>
+                <h2 className="font-bold text-brand-title-color text-lg mb-2">
+                  3. How We Use Your Information
+                </h2>
+                <p className="mb-2">We use the information we collect to:</p>
+                <ul className="list-disc pl-8 space-y-1">
+                  <li>Provide, operate, and maintain our services</li>
+                  <li>Process transactions and send related information</li>
+                  <li>Send you technical notices and support messages</li>
+                  <li>Respond to your comments and questions</li>
+                  <li>Improve our app and develop new features</li>
+                  <li>Personalize your experience</li>
+                  <li>Send marketing communications (with your consent)</li>
+                  <li>Comply with legal obligations</li>
+                </ul>
+              </div>
+
+              <div>
+                <h2 className="font-bold text-brand-title-color text-lg mb-2">
+                  4. Information Sharing and Disclosure
+                </h2>
+                <p className="mb-2">
+                  We do not sell, trade, or otherwise transfer your personal
+                  information to third parties except in the following
+                  circumstances:
+                </p>
+                <ul className="list-disc pl-8 space-y-1">
+                  <li>With your explicit consent</li>
+                  <li>
+                    To service providers who assist us in operating our app
+                  </li>
+                  <li>When required by law or to protect our rights</li>
+                  <li>In connection with a business transfer or merger</li>
+                  <li>To prevent fraud or security issues</li>
+                </ul>
+              </div>
+
+              <div>
+                <h2 className="font-bold text-brand-title-color text-lg mb-2">
+                  5. Data Security
+                </h2>
+                <p>
+                  We implement appropriate technical and organizational security
+                  measures to protect your personal information against unauthorized
+                  access, alteration, disclosure, or destruction. However, no
+                  method of transmission over the internet or electronic storage
+                  is 100% secure, and we cannot guarantee absolute security.
+                </p>
+              </div>
+
+              <div>
+                <h2 className="font-bold text-brand-title-color text-lg mb-2">
+                  6. Your Rights
+                </h2>
+                <p className="mb-2">
+                  Depending on your location, you may have certain rights regarding
+                  your personal information:
+                </p>
+                <ul className="list-disc pl-8 space-y-1">
+                  <li>Access and receive a copy of your personal information</li>
+                  <li>Correct inaccurate or incomplete information</li>
+                  <li>Delete your personal information</li>
+                  <li>Restrict or object to certain processing</li>
+                  <li>Data portability</li>
+                  <li>Withdraw consent at any time</li>
+                </ul>
+              </div>
+
+              <div>
+                <h2 className="font-bold text-brand-title-color text-lg mb-2">
+                  7. Cookies and Tracking Technologies
+                </h2>
+                <p>
+                  We use cookies and similar tracking technologies to enhance your
+                  experience, analyze usage patterns, and improve our services. You
+                  can control cookie settings through your device or browser
+                  preferences.
+                </p>
+              </div>
+
+              <div>
+                <h2 className="font-bold text-brand-title-color text-lg mb-2">
+                  8. Third-Party Services
+                </h2>
+                <p>
+                  Our app may contain links to third-party websites or services. We
+                  are not responsible for the privacy practices of these third
+                  parties. We encourage you to read their privacy policies before
+                  providing any personal information.
+                </p>
+              </div>
+
+              <div>
+                <h2 className="font-bold text-brand-title-color text-lg mb-2">
+                  9. Children&apos;s Privacy
+                </h2>
+                <p>
+                  Our services are not intended for children under 18 years of age.
+                  We do not knowingly collect personal information from children
+                  under 18. If we become aware that we have collected personal
+                  information from a child under 18, we will take steps to delete
+                  such information.
+                </p>
+              </div>
+
+              <div>
+                <h2 className="font-bold text-brand-title-color text-lg mb-2">
+                  10. Changes to This Privacy Policy
+                </h2>
+                <p>
+                  We may update this Privacy Policy from time to time. We will
+                  notify you of any changes by posting the new Privacy Policy on
+                  this page and updating the &quot;Last updated&quot; date. You are
+                  advised to review this Privacy Policy periodically for any
+                  changes.
+                </p>
+              </div>
+
+              <div>
+                <h2 className="font-bold text-brand-title-color text-lg mb-2">
+                  11. Contact Us
+                </h2>
+                <p>
+                  If you have any questions about this Privacy Policy or our
+                  privacy practices, please contact us:
+                </p>
+                <p className="mt-2">
+                  Email:{" "}
+                  <a
+                    href="mailto:privacy@findorlookup.com"
+                    className="text-brand-blue hover:underline"
+                  >
+                    privacy@findorlookup.com
+                  </a>
+                </p>
+              </div>
+            </section>
           </div>
         </div>
       </main>

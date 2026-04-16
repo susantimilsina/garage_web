@@ -179,14 +179,14 @@ const TermsAndConditions = () => {
                 <h2 className="font-bold text-brand-title-color text-lg mb-2">
                   10. Contact Us
                 </h2>
-                <p>For questions or concerns, contact us at:</p>
+                <p>For questions contact us at:</p>
                 <p className="mt-2">
                   Email:{" "}
                   <a
-                    href="mailto:support@findgarageandyardsale.com"
+                    href="mailto:support@findorlookup.com"
                     className="text-brand-blue hover:underline"
                   >
-                    support@findgarageandyardsale.com
+                    support@findorlookup.com
                   </a>
                 </p>
               </div>
