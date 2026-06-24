@@ -50,7 +50,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link to="/terms-and-conditions" className="hover:underline text-white/90">
-                  Terms and Conditions
+                  Terms of Use
                 </Link>
               </li>
             </ul>
@@ -117,7 +117,7 @@ const Footer = () => {
               Privacy Policy
             </Link>
             <Link to="/terms-and-conditions" className="hover:underline text-white/90">
-              Terms and Conditions
+              Terms of Use
             </Link>
           </div>
         </div>
