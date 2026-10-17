@@ -59,7 +59,7 @@ const GarageAndYardSales = () => {
       imgSrc: security,
       title: "4. Safe and Secure Platform",
       description:
-        "Securely connect with sellers or buyers through our in-app messaging system for safe transactions.",
+        "A safe and secure platform designed to protect every buyer and seller interaction.",
     },
     {
       imgSrc: eco,

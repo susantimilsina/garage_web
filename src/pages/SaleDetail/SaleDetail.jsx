@@ -258,7 +258,7 @@ const SaleDetail = () => {
                 <p className="text-brand-light-text-color font-rethink mb-4">
                   {expired
                     ? "This listing has expired. Download the app to find active garage and yard sales near you."
-                    : "Get directions, save this sale, and message the seller in the Garage & Yard Sale app."}
+                    : "Get directions and save this sale in the Garage & Yard Sale app."}
                 </p>
                 <div className="flex flex-wrap gap-4">
                   <a
