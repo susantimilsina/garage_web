@@ -25,7 +25,7 @@ const PrivacyPolicy = () => {
               Privacy Policy
             </h1>
             <p className="text-sm text-brand-light-text-color font-rethink mb-8">
-              Last Updated: April 27, 2026
+              Last Updated: October 28, 2026
             </p>
 
             <section className="text-brand-text-color font-rethink leading-relaxed space-y-6">
@@ -34,8 +34,9 @@ const PrivacyPolicy = () => {
                   Find Garage and Yard Sale (&quot;Company,&quot; &quot;we,&quot;
                   &quot;our,&quot; or &quot;us&quot;) is committed to protecting the privacy and
                   security of users of our website located at www.findgarageandyardsale.com (the
-                  &quot;Site&quot;) and related services (collectively, the
-                  &quot;Services&quot;). This Privacy Policy explains how we collect, use,
+                  &quot;Site&quot;), our mobile applications available through the Apple App Store
+                  and Google Play Store (the &quot;App&quot;), and related services (collectively,
+                  the &quot;Services&quot;). This Privacy Policy explains how we collect, use,
                   disclose, and safeguard Personal Information when users browse garage sale
                   listings, submit listings, subscribe to alerts, or otherwise interact with the
                   Services.
@@ -89,6 +90,11 @@ const PrivacyPolicy = () => {
                   <li>browser and device information</li>
                   <li>approximate location derived from IP address</li>
                   <li>usage and interaction data relating to the Services</li>
+                  <li>
+                    mobile advertising identifiers (Apple Identifier for Advertising / IDFA on iOS;
+                    Google Advertising ID / GAID on Android), where you permit their use for
+                    advertising purposes
+                  </li>
                 </ul>
                 <p className="mt-3">
                   If you submit a listing, certain information (including listing address, event
@@ -375,17 +381,27 @@ const PrivacyPolicy = () => {
                 <h2 className="font-bold text-brand-title-color text-lg mb-2">
                   Sale or Sharing of Personal Information
                 </h2>
+                <p className="mb-2">
+                  We do not sell Personal Information for monetary consideration.
+                </p>
+                <p className="mb-2">
+                  In the mobile App, we display advertising provided by Google AdMob. Where a user
+                  has consented to personalized advertising through the in-app consent prompt (such
+                  as the App Tracking Transparency prompt on iOS or the Google User Messaging
+                  Platform consent form), Google AdMob may receive the user&apos;s mobile
+                  advertising identifier and related information to serve interest-based ads. Under
+                  the California Consumer Privacy Act, as amended by the California Privacy Rights
+                  Act (&quot;CCPA/CPRA&quot;), this activity may be considered &quot;sharing&quot;
+                  of Personal Information for cross-context behavioral advertising. Users may opt
+                  out of personalized advertising at any time as described in the &quot;Mobile
+                  Application Advertising&quot; section below.
+                </p>
                 <p>
-                  We do not sell Personal Information for monetary consideration. We also do not
-                  share Personal Information for cross-context behavioral advertising as defined
-                  under the California Consumer Privacy Act, as amended by the California Privacy
-                  Rights Act (&quot;CCPA/CPRA&quot;). We do not knowingly sell or share the
-                  Personal Information of users under the age of 16 for cross-context behavioral
-                  advertising purposes. Based on our current configuration of the Services, we do
-                  not engage in such sharing. If our data practices change in the future in a
-                  manner that constitutes &quot;sale&quot; or &quot;sharing&quot; under applicable
-                  law, we will update this Privacy Policy and provide any required rights or
-                  opt-out mechanisms.
+                  We do not knowingly sell or share the Personal Information of users under the age
+                  of 16 for cross-context behavioral advertising purposes. If our data practices
+                  otherwise change in the future in a manner that constitutes &quot;sale&quot; or
+                  additional &quot;sharing&quot; under applicable law, we will update this Privacy
+                  Policy and provide any required rights or opt-out mechanisms.
                 </p>
               </div>
 
@@ -503,9 +519,12 @@ const PrivacyPolicy = () => {
                   <div>
                     <p className="font-semibold">Right to Opt Out of Sale or Sharing</p>
                     <p>
-                      We do not sell Personal Information for monetary consideration. We also do
-                      not share Personal Information for cross-context behavioral advertising as
-                      defined under applicable law.
+                      We do not sell Personal Information for monetary consideration. In the mobile
+                      App, personalized advertising served through Google AdMob may constitute
+                      &quot;sharing&quot; for cross-context behavioral advertising under the
+                      CCPA/CPRA when users consent to such use. You may opt out at any time
+                      through the mobile device settings described in the &quot;Mobile Application
+                      Advertising&quot; section below.
                     </p>
                   </div>
                   <div>
@@ -634,6 +653,10 @@ const PrivacyPolicy = () => {
                     analytics providers that help us understand how users interact with the
                     Services;
                   </li>
+                  <li>
+                    mobile advertising providers (such as Google AdMob) that serve advertisements
+                    within the App;
+                  </li>
                   <li>infrastructure and hosting providers; or</li>
                   <li>email notification and delivery providers.</li>
                 </ul>
@@ -643,6 +666,74 @@ const PrivacyPolicy = () => {
                   collected by third-party providers is subject to their own privacy policies and
                   practices. We encourage users to review the privacy policies of any third-party
                   services they interact with through the Services.
+                </p>
+              </div>
+
+              <div>
+                <h2 className="font-bold text-brand-title-color text-lg mb-2">
+                  Mobile Application Advertising
+                </h2>
+                <p className="mb-2">
+                  The mobile App displays banner and interstitial advertisements provided by Google
+                  AdMob, a mobile advertising service operated by Google LLC. AdMob may collect and
+                  process certain information to serve, measure, and improve advertising, including:
+                </p>
+                <ul className="list-disc pl-8 space-y-1 mb-3">
+                  <li>
+                    your mobile advertising identifier (Apple IDFA on iOS, Google Advertising ID on
+                    Android);
+                  </li>
+                  <li>IP address and approximate location derived from it;</li>
+                  <li>device information (model, operating system, language);</li>
+                  <li>
+                    general information about how you interact with the App and with ads shown
+                    in it.
+                  </li>
+                </ul>
+                <p className="mb-2">
+                  On iOS, the App presents the App Tracking Transparency prompt before advertising
+                  identifiers are used for cross-app tracking. In jurisdictions where required
+                  (including California and other U.S. states with applicable privacy laws), the
+                  App presents a Google User Messaging Platform consent form that lets you choose
+                  whether to receive personalized advertising. If you decline personalized ads, you
+                  will still see advertisements, but they will not be tailored to you.
+                </p>
+                <p className="mb-2">
+                  You can opt out of personalized advertising at any time:
+                </p>
+                <ul className="list-disc pl-8 space-y-1 mb-3">
+                  <li>
+                    <span className="font-semibold">iOS:</span> Settings &rarr; Privacy &amp;
+                    Security &rarr; Tracking &rarr; disable &ldquo;Allow Apps to Request to
+                    Track,&rdquo; or deny the tracking prompt within the App.
+                  </li>
+                  <li>
+                    <span className="font-semibold">Android:</span> Settings &rarr; Google &rarr;
+                    Ads &rarr; enable &ldquo;Delete advertising ID&rdquo; or &ldquo;Opt out of ads
+                    personalization.&rdquo;
+                  </li>
+                </ul>
+                <p>
+                  Google&apos;s use of information collected through AdMob is governed by its own
+                  policies. For more information, see Google&apos;s{" "}
+                  <a
+                    href="https://policies.google.com/technologies/partner-sites"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-brand-blue hover:underline"
+                  >
+                    Privacy &amp; Terms for partners
+                  </a>{" "}
+                  and the{" "}
+                  <a
+                    href="https://support.google.com/admob/answer/6128543"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-brand-blue hover:underline"
+                  >
+                    AdMob privacy information
+                  </a>
+                  .
                 </p>
               </div>
 
