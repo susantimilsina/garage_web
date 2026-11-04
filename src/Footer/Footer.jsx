@@ -44,6 +44,11 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
+                <a href="/garage-sales/" className="hover:underline text-white/90">
+                  Browse by Location
+                </a>
+              </li>
+              <li>
                 <Link to="/privacy-policy" className="hover:underline text-white/90">
                   Privacy Policy
                 </Link>
