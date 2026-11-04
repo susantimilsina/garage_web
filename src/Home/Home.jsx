@@ -33,7 +33,7 @@ const FAQ_SCHEMA = {
       name: "Is it free to use the app?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Yes! Browsing and exploring garage sales is free. Posting a sale costs $10 for a 3-day listing.",
+        text: "Yes! Browsing garage sales and posting your own sale are both free.",
       },
     },
     {
@@ -41,7 +41,7 @@ const FAQ_SCHEMA = {
       name: "What is the cost to post a sale?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Posting a 3-day sale costs $10. This covers photo uploads, detailed listing, and local buyer reach.",
+        text: "Posting a sale is free. This includes photo uploads, a detailed listing, and local buyer reach.",
       },
     },
   ],
