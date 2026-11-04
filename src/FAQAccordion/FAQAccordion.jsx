@@ -70,12 +70,12 @@ const FAQAccordion = () => {
     {
       question: "Is it free to use the app?",
       answer:
-        "Yes! The Garage and Yard Sale app is free to browse and explore. Users can search and save local garage and yard sales without any hidden fees. While browsing is free, posting a sale requires a $10 fee for a 3-day listing period.",
+        "Yes! The Garage and Yard Sale app is free to browse and explore. Users can search and save local garage and yard sales without any hidden fees. Posting your own sale is free too.",
     },
     {
       question: "What is the cost to post a sale?",
       answer:
-        "Posting a 3-day sale on Garage and Yard Sale costs $10. This covers photo uploads, detailed sales listing, and local buyer reach, without the additional hassle of printing or advertising.",
+        "Posting a sale on Garage and Yard Sale is free. This includes photo uploads, a detailed sales listing, and local buyer reach, without the additional hassle of printing or advertising.",
     },
   ];
 
