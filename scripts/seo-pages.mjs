@@ -232,17 +232,35 @@ const saleTime = (listing, today) => {
   return `${formatDate(slot.date.slice(0, 10))}${hours}`;
 };
 
+const ICONS = {
+  calendar: '<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>',
+  pin: '<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></svg>',
+};
+
+const saleImage = (listing, { full = false } = {}) => {
+  const image = (listing.images || [])[0];
+  const url = full ? image?.file || image?.thumbnail : image?.thumbnail || image?.file;
+  return /^https:\/\//.test(url || "") ? url : null;
+};
+
+const saleImageHtml = (listing) => {
+  const url = saleImage(listing);
+  return url
+    ? `<img src="${escapeHtml(url)}" alt="${escapeHtml(listing.title)}" width="640" height="400" loading="lazy" decoding="async">`
+    : `<img class="placeholder" src="/logo.png" alt="" width="96" height="96" loading="lazy">`;
+};
+
 // Street addresses and descriptions stay on the sale's own page
 const upcomingHtml = (summary, today) => {
   if (!summary.upcoming.length) {
-    return `<p>No upcoming sales are listed here right now. <a href="/sales">See sales in other areas</a> or post your own for free.</p>`;
+    return `<div class="card empty"><h3>No upcoming sales here right now</h3><p>New sales are added often. You can <a href="/sales">browse sales in other areas</a> or post your own for free.</p></div>`;
   }
-  const rows = summary.upcoming.slice(0, MAX_UPCOMING_SHOWN).map((listing) => {
+  const cards = summary.upcoming.slice(0, MAX_UPCOMING_SHOWN).map((listing) => {
     const place = listLocation(listing);
-    const town = place?.city ? ` in ${escapeHtml(place.city)}` : "";
-    return `<li><a href="/sale/${encodeURIComponent(listing.id)}">${escapeHtml(listing.title)}</a><br><span class="meta">${escapeHtml(listing.type)} sale${town} · ${escapeHtml(saleTime(listing, today))}</span></li>`;
+    const town = place?.city ? `${escapeHtml(place.city)}, ${place.stateCode}` : escapeHtml(place?.stateCode);
+    return `<a class="card sale" href="/sale/${encodeURIComponent(listing.id)}"><div class="sale-image">${saleImageHtml(listing)}<span class="chip chip-green">${escapeHtml(listing.type)}</span></div><div class="sale-body"><h3>${escapeHtml(listing.title)}</h3><p class="line line-red">${ICONS.calendar}<span>${escapeHtml(saleTime(listing, today))}</span></p><p class="line line-green">${ICONS.pin}<span>${town}</span></p></div></a>`;
   });
-  return `<ul class="sales">${rows.join("")}</ul>`;
+  return `<div class="grid">${cards.join("")}</div>`;
 };
 
 const eventSchema = (listing, stateCode) => {
@@ -256,6 +274,7 @@ const eventSchema = (listing, stateCode) => {
     eventStatus: "https://schema.org/EventScheduled",
     eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
     url: absolute(`/sale/${listing.id}`),
+    ...(saleImage(listing, { full: true }) ? { image: [saleImage(listing, { full: true })] } : {}),
     location: {
       "@type": "Place",
       name: place?.city ? `${place.city}, ${stateCode}` : stateCode,
@@ -292,23 +311,69 @@ const faqSchema = (items) => ({
 
 const STYLES = `
 *{box-sizing:border-box}
-body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:#1A1A1A;background:#fff;line-height:1.6}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:#F7F8FA;color:#1A1A1A;font-family:"Rethink Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-size:16px;line-height:1.6}
 a{color:#255099}
-header,footer{background:#255099;color:#fff;padding:16px}
-header a,footer a{color:#fff}
-.brand{font-weight:700;text-decoration:none}
-.wrap{max-width:760px;margin:0 auto}
-main{padding:16px}
-nav.crumbs{font-size:14px;margin-bottom:8px}
-h1{font-size:30px;line-height:1.25;margin:8px 0 16px;color:#262437}
-h2{font-size:22px;margin:32px 0 8px;color:#262437}
-h3{font-size:17px;margin:16px 0 4px}
-.answer{background:#F2FFF4;border-left:4px solid #368841;padding:12px 16px;margin:0 0 16px}
-.sales,.links{padding-left:20px}
-.sales li{margin-bottom:12px}
-.meta{font-size:14px;color:#524342}
-.cta{display:inline-block;background:#BC2032;color:#fff;padding:10px 16px;border-radius:6px;text-decoration:none;margin:4px 8px 4px 0}
-footer{margin-top:32px;font-size:14px}
+h1,h2{font-family:Merriweather,Georgia,serif;color:#262437}
+.wrap{max-width:1040px;margin:0 auto;padding:0 16px}
+.nav{background:#fff;box-shadow:0 1px 4px rgba(38,36,55,.1)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:64px}
+.logo{display:flex;align-items:center;text-decoration:none}
+.logo img{display:block;width:48px;height:48px;object-fit:contain}
+.nav-links{display:flex;align-items:center;gap:8px;font-weight:500;font-size:15px}
+.nav-links a{color:#262437;text-decoration:none;padding:6px 8px}
+.nav-links a.pill{background:#255099;color:#fff;border-radius:999px;padding:6px 16px}
+.hero{padding:16px 0 8px}
+.crumbs{font-size:13px;color:#524342;margin-bottom:8px}
+.crumbs a{color:#524342;text-decoration:none}
+.crumbs a:hover{text-decoration:underline}
+h1{font-size:30px;line-height:1.25;margin:0 0 16px}
+h2{font-size:22px;line-height:1.3;margin:0 0 16px}
+h3{font-size:17px;line-height:1.35;margin:0}
+section{margin-top:32px}
+.answer{background:#F2FFF4;border:1px solid #CDEFD3;border-radius:14px;padding:16px;margin:0;font-size:17px}
+.updated{font-size:13px;color:#524342;margin:8px 0 0}
+.card{display:block;background:#fff;border-radius:14px;padding:16px;box-shadow:0 1px 6px rgba(38,36,55,.1)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+a.card{color:inherit;text-decoration:none}
+a.card:hover{box-shadow:0 4px 14px rgba(38,36,55,.16)}
+.sale{padding:0;overflow:hidden}
+.sale-image{position:relative;display:flex;align-items:center;justify-content:center;aspect-ratio:16/10;background:#FFF8F7}
+.sale-image img{display:block;width:100%;height:100%;object-fit:cover}
+.sale-image img.placeholder{width:96px;height:96px;object-fit:contain}
+.sale-image .chip{position:absolute;top:10px;left:10px}
+.sale-body{padding:12px 16px 16px}
+.sale h3{margin:0 0 8px}
+.line{display:flex;gap:8px;align-items:flex-start;margin:4px 0 0;font-size:14px;color:#524342}
+.icon{flex:none;width:18px;height:18px;margin-top:2px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.line-red .icon{color:#BC2032}
+.line-green .icon{color:#368841}
+.chip{display:inline-block;border-radius:999px;padding:3px 12px;font-size:13px;font-weight:500;background:#FFE9D9;color:#262437}
+.chip-green{background:#B2FFBD}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 0}
+.empty h3{margin-bottom:4px}
+.empty p{margin:0}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.stat{background:#fff;border-radius:14px;padding:16px;box-shadow:0 1px 6px rgba(38,36,55,.1)}
+.stat strong{display:block;font-size:20px;line-height:1.3;color:#255099}
+.stat span{font-size:13px;color:#524342}
+.pills{display:flex;flex-wrap:wrap;gap:8px}
+.pills a{background:#fff;border:1px solid #D5DCE8;border-radius:999px;padding:7px 14px;font-size:14px;color:#255099;text-decoration:none}
+.pills a:hover{background:#EEF3FB}
+.place-count{display:block;font-size:13px;color:#524342;margin-top:2px}
+.btn{display:inline-block;background:#255099;color:#fff;border-radius:999px;padding:10px 20px;font-weight:600;text-decoration:none}
+.cta-row{margin-top:16px}
+.band{background:#255099;color:#fff;border-radius:14px;padding:24px 16px}
+.band h2{color:#fff;margin-bottom:8px}
+.band p{margin:0 0 16px}
+.band .btn{background:#fff;color:#255099;margin:0 8px 8px 0}
+details{background:#fff;border-radius:14px;box-shadow:0 1px 6px rgba(38,36,55,.1);margin-bottom:12px}
+summary{cursor:pointer;font-weight:600;padding:14px 16px;color:#262437}
+details p{margin:0;padding:0 16px 14px;color:#524342}
+.foot{background:#255099;color:#fff;margin-top:48px;padding:24px 0;font-size:14px}
+.foot a{color:#fff;margin-right:16px;white-space:nowrap;display:inline-block;padding:2px 0}
+.foot p{margin:8px 0 0;color:rgba(255,255,255,.85)}
+@media(max-width:480px){h1{font-size:26px}.nav-links .hide-sm{display:none}}
 `;
 
 const layout = ({ title, description, path, crumbs, body, schemas }) => `<!DOCTYPE html>
@@ -328,40 +393,58 @@ const layout = ({ title, description, path, crumbs, body, schemas }) => `<!DOCTY
 <meta property="og:url" content="${absolute(path)}">
 <meta property="og:image" content="${absolute("/logo.png")}">
 <meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Rethink+Sans:wght@400;500;600&display=swap">
 ${schemas.map(jsonLd).join("\n")}
 <style>${STYLES}</style>
 </head>
 <body>
-<header><div class="wrap"><a class="brand" href="/">Find Garage and Yard Sale</a></div></header>
-<main><div class="wrap">
+<header class="nav"><div class="wrap">
+<a class="logo" href="/"><img src="/logo.png" width="48" height="48" alt="Find Garage and Yard Sale"></a>
+<nav class="nav-links" aria-label="Main"><a class="hide-sm" href="/">Home</a><a href="/garage-sales/">Locations</a><a class="pill" href="/sales">Find Sales</a></nav>
+</div></header>
+<main class="wrap">
+<div class="hero">
 <nav class="crumbs" aria-label="Breadcrumb">${crumbs
   .map((crumb, index) =>
     index === crumbs.length - 1 ? escapeHtml(crumb.name) : `<a href="${crumb.path}">${escapeHtml(crumb.name)}</a>`
   )
-  .join(" › ")}</nav>
+  .join(" / ")}</nav>
 ${body}
-</div></main>
-<footer><div class="wrap"><a href="/sales">Find Sales</a> · <a href="/garage-sales/">Browse by location</a> · <a href="/privacy-policy">Privacy Policy</a> · <a href="/terms-and-conditions">Terms of Use</a></div></footer>
+</main>
+<footer class="foot"><div class="wrap">
+<a href="/sales">Find Sales</a><a href="/garage-sales/">Browse by Location</a><a href="/privacy-policy">Privacy Policy</a><a href="/terms-and-conditions">Terms of Use</a>
+<p>Find Garage and Yard Sale. Free to browse and free to post.</p>
+</div></footer>
 </body>
 </html>
 `;
 
-const postSaleHtml = `<h2>Post your own sale for free</h2>
-<p>Add your sale in the Find Garage and Yard Sale app.</p>
-<p><a class="cta" href="${escapeHtml(APP_STORE_URL)}">Get it on iPhone</a><a class="cta" href="${escapeHtml(PLAY_STORE_URL)}">Get it on Android</a></p>`;
+const postSaleHtml = `<section class="band"><h2>Post your own sale for free</h2>
+<p>Reach local buyers by adding your sale in the Find Garage and Yard Sale app.</p>
+<a class="btn" href="${escapeHtml(APP_STORE_URL)}">Get it on iPhone</a><a class="btn" href="${escapeHtml(PLAY_STORE_URL)}">Get it on Android</a></section>`;
 
 const statsHtml = (place, summary) => {
-  const facts = [`<li>${salesCount(summary.total)} listed in ${escapeHtml(place)} on this site</li>`];
-  if (summary.lastSaleDate) facts.push(`<li>Most recent sale: ${formatDate(summary.lastSaleDate)}</li>`);
-  if (summary.commonDays.length) facts.push(`<li>Most common days: ${summary.commonDays.join(" and ")}</li>`);
-  if (summary.topCategories.length) facts.push(`<li>Popular categories: ${escapeHtml(summary.topCategories.join(", "))}</li>`);
-  return `<h2>Garage sale activity in ${escapeHtml(place)}</h2><ul>${facts.join("")}</ul>`;
+  const stat = (value, label) => `<div class="stat"><strong>${escapeHtml(value)}</strong><span>${escapeHtml(label)}</span></div>`;
+  const tiles = [
+    stat(summary.upcoming.length, "Upcoming now"),
+    stat(summary.total, summary.total === 1 ? "Sale listed" : "Sales listed"),
+  ];
+  if (summary.lastSaleDate) tiles.push(stat(formatDate(summary.lastSaleDate), "Most recent sale"));
+  if (summary.commonDays.length) tiles.push(stat(summary.commonDays.join(" & "), "Most common days"));
+  const categories = summary.topCategories.length
+    ? `<div class="chips" aria-label="Popular categories">${summary.topCategories
+        .map((category) => `<span class="chip">${escapeHtml(category)}</span>`)
+        .join("")}</div>`
+    : "";
+  return `<section><h2>Garage sale activity in ${escapeHtml(place)}</h2><div class="stats">${tiles.join("")}</div>${categories}</section>`;
 };
 
 const faqHtml = (items) =>
-  `<h2>Frequently asked questions</h2>${items
-    .map((item) => `<h3>${escapeHtml(item.question)}</h3><p>${escapeHtml(item.answer)}</p>`)
-    .join("")}`;
+  `<section><h2>Frequently asked questions</h2>${items
+    .map((item) => `<details><summary>${escapeHtml(item.question)}</summary><p>${escapeHtml(item.answer)}</p></details>`)
+    .join("")}</section>`;
 
 const itemListSchema = (name, path, upcoming, stateCode) => ({
   "@context": "https://schema.org",
@@ -382,7 +465,18 @@ const itemListSchema = (name, path, upcoming, stateCode) => ({
     : {}),
 });
 
-const updatedHtml = (today) => `<p class="meta">Last updated ${formatDate(today)}.</p>`;
+const updatedHtml = (today) => `<p class="updated">Last updated ${formatDate(today)}</p>`;
+
+const heroHtml = (heading, answer, today) => `<h1>${escapeHtml(heading)}</h1>
+<p class="answer">${escapeHtml(answer)}</p>
+${updatedHtml(today)}
+</div>`;
+
+const upcomingSection = (summary, today) => `<section><h2>Upcoming sales</h2>
+${upcomingHtml(summary, today)}
+<p class="cta-row"><a class="btn" href="/sales">Browse all sales</a></p></section>`;
+
+const placesCount = (total) => `<span class="place-count">${salesCount(total)} listed</span>`;
 
 export const renderCityPage = (city, states, today) => {
   const place = `${city.name}, ${city.stateCode}`;
@@ -395,17 +489,12 @@ export const renderCityPage = (city, states, today) => {
     { name: city.name, path: city.path },
   ];
   const nearby = nearbyCities(city, states);
-  const body = `<h1>Garage Sales in ${escapeHtml(place)}</h1>
-<p class="answer">${escapeHtml(quickAnswer(place, summary))}</p>
-${updatedHtml(today)}
-<h2>Upcoming sales</h2>
-${upcomingHtml(summary, today)}
-<p><a class="cta" href="/sales">Browse all sales</a></p>
+  const body = `${heroHtml(`Garage Sales in ${place}`, quickAnswer(place, summary), today)}
+${upcomingSection(summary, today)}
 ${statsHtml(place, summary)}
-${nearby.length ? `<h2>More cities to browse</h2><ul class="links">${nearby
-    .map((other) => `<li><a href="${other.path}">Garage sales in ${escapeHtml(other.name)}, ${other.stateCode}</a></li>`)
-    .join("")}</ul>` : ""}
-<p><a href="${city.statePath}">All garage sales in ${escapeHtml(city.stateName)}</a></p>
+<section><h2>More cities to browse</h2><div class="pills">${nearby
+    .map((other) => `<a href="${other.path}">${escapeHtml(other.name)}, ${other.stateCode}</a>`)
+    .join("")}<a href="${city.statePath}">All of ${escapeHtml(city.stateName)}</a></div></section>
 ${postSaleHtml}
 ${faqHtml(faq)}`;
   const title = `Garage Sales in ${place} | Find Garage and Yard Sale`;
@@ -427,15 +516,11 @@ export const renderStatePage = (state, today) => {
     { name: "Garage Sales", path: "/garage-sales/" },
     { name: state.name, path: state.path },
   ];
-  const body = `<h1>Garage Sales in ${escapeHtml(state.name)}</h1>
-<p class="answer">${escapeHtml(quickAnswer(state.name, summary))}</p>
-${updatedHtml(today)}
-<h2>Upcoming sales</h2>
-${upcomingHtml(summary, today)}
-<p><a class="cta" href="/sales">Browse all sales</a></p>
-${state.cities.length ? `<h2>Cities in ${escapeHtml(state.name)}</h2><ul class="links">${state.cities
-    .map((city) => `<li><a href="${city.path}">Garage sales in ${escapeHtml(city.name)}</a></li>`)
-    .join("")}</ul>` : ""}
+  const body = `${heroHtml(`Garage Sales in ${state.name}`, quickAnswer(state.name, summary), today)}
+${upcomingSection(summary, today)}
+${state.cities.length ? `<section><h2>Cities in ${escapeHtml(state.name)}</h2><div class="grid">${state.cities
+    .map((city) => `<a class="card" href="${city.path}"><h3>${escapeHtml(city.name)}</h3>${placesCount(city.summary.total)}</a>`)
+    .join("")}</div></section>` : ""}
 ${statsHtml(state.name, summary)}
 ${postSaleHtml}
 ${faqHtml(faq)}`;
@@ -457,11 +542,10 @@ export const renderDirectoryPage = (states, today) => {
   ];
   const description =
     "Find garage and yard sales by state and city across the United States. Browsing and posting your own sale are free.";
-  const body = `<h1>Garage Sales by Location</h1>
-<p class="answer">${escapeHtml(description)}</p>
-${updatedHtml(today)}
-<h2>Browse by state</h2>
-<ul class="links">${states.map((state) => `<li><a href="${state.path}">${escapeHtml(state.name)}</a></li>`).join("")}</ul>
+  const body = `${heroHtml("Garage Sales by Location", description, today)}
+<section><h2>Browse by state</h2><div class="grid">${states
+    .map((state) => `<a class="card" href="${state.path}"><h3>${escapeHtml(state.name)}</h3>${placesCount(state.summary.total)}</a>`)
+    .join("")}</div></section>
 ${postSaleHtml}`;
   const title = "Garage Sales by State and City | Find Garage and Yard Sale";
   return layout({

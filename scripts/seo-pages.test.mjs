@@ -154,9 +154,28 @@ test("one sale reads correctly and a future sale isn't the most recent", () => {
   const states = buildLocations([upcoming], TODAY);
   const html = renderCityPage(states[0].cities[0], states, TODAY);
   assert.ok(html.includes("has listed 1 sale here."));
-  assert.ok(html.includes("<li>1 sale listed in"));
+  assert.ok(html.includes("Sale listed"));
   assert.ok(!html.includes("Most recent sale"));
   assert.ok(!html.includes("The most recent was"));
+});
+
+test("upcoming sale cards show the listing image", () => {
+  const upcoming = (images) =>
+    listing({
+      status: "Active",
+      images,
+      available_time_slots: [{ date: "2026-11-08", start_time: "08:00:00", end_time: "12:00:00" }],
+    });
+  const render = (images) => {
+    const states = buildLocations([upcoming(images)], TODAY);
+    return renderCityPage(states[0].cities[0], states, TODAY);
+  };
+  const withThumbnail = render([{ file: "https://cdn.example/full.jpg", thumbnail: "https://cdn.example/thumb.jpg" }]);
+  assert.ok(withThumbnail.includes('src="https://cdn.example/thumb.jpg"'));
+  assert.ok(withThumbnail.includes('"image":["https://cdn.example/full.jpg"]'));
+  assert.ok(render([{ file: "https://cdn.example/full.jpg", thumbnail: null }]).includes('src="https://cdn.example/full.jpg"'));
+  assert.ok(render([]).includes('class="placeholder"'));
+  assert.ok(render([{ file: "javascript:alert(1)" }]).includes('class="placeholder"'));
 });
 
 test("directory links to states and sitemap lists full URLs", () => {
