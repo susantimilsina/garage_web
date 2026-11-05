@@ -1,4 +1,4 @@
-import { mkdir, writeFile } from "node:fs/promises";
+import { copyFile, mkdir, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import {
   buildLocations,
@@ -42,6 +42,11 @@ const main = async () => {
   if (listings.length < MIN_EXPECTED_LISTINGS) {
     throw new Error(`Expected at least ${MIN_EXPECTED_LISTINGS} listings but got ${listings.length}`);
   }
+
+  // Amplify redirects extensionless files, but Apple needs this one served directly.
+  // A rewrite rule points the original path at this copy.
+  const appleFile = join(outDir, ".well-known/apple-app-site-association");
+  await copyFile(appleFile, `${appleFile}.json`);
 
   const states = buildLocations(listings, today);
   const paths = ["/garage-sales/"];

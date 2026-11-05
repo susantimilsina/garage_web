@@ -94,15 +94,39 @@ test("different spellings of a city combine into one page", () => {
   assert.equal(newMexico.cities[0].name, "Rio Rancho");
 });
 
-test("pages never expose private listing data", () => {
+test("pages show upcoming addresses but not past addresses or other private data", () => {
   const upcoming = listing({
     status: "Active",
     available_time_slots: [{ date: "2026-11-08", start_time: "08:00:00", end_time: "12:00:00" }],
+    location: {
+      locality: "Austin",
+      admin_area: "TX",
+      throughfare: "500 Public Road",
+      zip_code: "78702",
+      apartment_number: "Unit 9",
+      latitude: 30.27,
+      longitude: -97.74,
+    },
   });
   const states = buildLocations([...many(5), upcoming], TODAY);
   const html = renderCityPage(states[0].cities[0], states, TODAY) + renderStatePage(states[0], TODAY);
-  for (const secret of ["123 Private Street", "555-0100", "txn-secret", "78701"]) {
+  assert.ok(html.includes("500 Public Road, Austin, TX"));
+  assert.ok(html.includes('"streetAddress":"500 Public Road"'));
+  assert.ok(html.includes('"postalCode":"78702"'));
+  assert.ok(html.includes('"GeoCoordinates"'));
+  for (const secret of ["123 Private Street", "78701", "555-0100", "txn-secret", "Unit 9"]) {
     assert.ok(!html.includes(secret), `page contains ${secret}`);
+  }
+});
+
+test("a sale marked cancelled isn't upcoming", () => {
+  const slot = [{ date: "2026-11-08", start_time: "08:00:00", end_time: "12:00:00" }];
+  for (const overrides of [
+    { title: "Yard sale CANCELLED" },
+    { location: { locality: "Austin", admin_area: "TX", throughfare: "Canceled" } },
+  ]) {
+    const states = buildLocations([...many(3), listing({ status: "Active", available_time_slots: slot, ...overrides })], TODAY);
+    assert.equal(states[0].summary.upcoming.length, 0);
   }
 });
 

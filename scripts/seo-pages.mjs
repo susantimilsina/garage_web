@@ -70,8 +70,24 @@ const formatTime = (time) => {
   return `${hours % 12 || 12}:${match[2]} ${hours < 12 ? "AM" : "PM"}`;
 };
 
+// Sellers sometimes mark a cancelled sale only in its title or address
+const isCancelled = (listing) =>
+  /\bcancell?ed\b/i.test(
+    [listing.title, listing.location?.throughfare, listing.location?.address_line].filter(Boolean).join(" ")
+  );
+
 export const isUpcoming = (listing, today) =>
-  listing.status === "Active" && saleDates(listing).some((date) => date >= today);
+  listing.status === "Active" &&
+  !isCancelled(listing) &&
+  saleDates(listing).some((date) => date >= today);
+
+const streetAddress = (listing) => {
+  const location = listing.location || {};
+  return [location.address_line, location.sub_throughfare, location.throughfare]
+    .map((part) => (part || "").trim())
+    .filter(Boolean)
+    .join(" ");
+};
 
 const topCounts = (values, limit) => {
   const counts = new Map();
@@ -250,15 +266,17 @@ const saleImageHtml = (listing) => {
     : `<img class="placeholder" src="/logo.png" alt="" width="96" height="96" loading="lazy">`;
 };
 
-// Street addresses and descriptions stay on the sale's own page
+// Only upcoming sales are listed, so past sales' addresses stay off these pages
 const upcomingHtml = (summary, today) => {
   if (!summary.upcoming.length) {
     return `<div class="card empty"><h3>No upcoming sales here right now</h3><p>New sales are added often. You can <a href="/sales">browse sales in other areas</a> or post your own for free.</p></div>`;
   }
   const cards = summary.upcoming.slice(0, MAX_UPCOMING_SHOWN).map((listing) => {
     const place = listLocation(listing);
-    const town = place?.city ? `${escapeHtml(place.city)}, ${place.stateCode}` : escapeHtml(place?.stateCode);
-    return `<a class="card sale" href="/sale/${encodeURIComponent(listing.id)}"><div class="sale-image">${saleImageHtml(listing)}<span class="chip chip-green">${escapeHtml(listing.type)}</span></div><div class="sale-body"><h3>${escapeHtml(listing.title)}</h3><p class="line line-red">${ICONS.calendar}<span>${escapeHtml(saleTime(listing, today))}</span></p><p class="line line-green">${ICONS.pin}<span>${town}</span></p></div></a>`;
+    const street = streetAddress(listing);
+    const town = place?.city ? `${place.city}, ${place.stateCode}` : place?.stateCode;
+    const address = escapeHtml([street, town].filter(Boolean).join(", "));
+    return `<a class="card sale" href="/sale/${encodeURIComponent(listing.id)}"><div class="sale-image">${saleImageHtml(listing)}<span class="chip chip-green">${escapeHtml(listing.type)}</span></div><div class="sale-body"><h3>${escapeHtml(listing.title)}</h3><p class="line line-red">${ICONS.calendar}<span>${escapeHtml(saleTime(listing, today))}</span></p><p class="line line-green">${ICONS.pin}<span>${address}</span></p></div></a>`;
   });
   return `<div class="grid">${cards.join("")}</div>`;
 };
@@ -266,6 +284,10 @@ const upcomingHtml = (summary, today) => {
 const eventSchema = (listing, stateCode) => {
   const dates = saleDates(listing);
   const place = listLocation(listing);
+  const street = streetAddress(listing);
+  const zip = (listing.location?.zip_code || "").trim();
+  const latitude = Number(listing.location?.latitude);
+  const longitude = Number(listing.location?.longitude);
   return {
     "@type": "Event",
     name: listing.title,
@@ -278,8 +300,11 @@ const eventSchema = (listing, stateCode) => {
     location: {
       "@type": "Place",
       name: place?.city ? `${place.city}, ${stateCode}` : stateCode,
+      ...(latitude && longitude ? { geo: { "@type": "GeoCoordinates", latitude, longitude } } : {}),
       address: {
         "@type": "PostalAddress",
+        ...(street ? { streetAddress: street } : {}),
+        ...(zip ? { postalCode: zip } : {}),
         ...(place?.city ? { addressLocality: place.city } : {}),
         addressRegion: stateCode,
         addressCountry: "US",

@@ -126,6 +126,7 @@ const SaleDetail = () => {
             : `${type} sale - ${address}. ${dateStr}`
         }
         path={`/sale/${id}`}
+        noIndex={expired}
         image={
           fallbackImages[0]?.startsWith("http") ? fallbackImages[0] : undefined
         }
