@@ -71,6 +71,12 @@ const SaleDetail = () => {
   if (notFound || !sale) {
     return (
       <div className="min-h-screen flex flex-col bg-white">
+        <SeoHead
+          title="Sale Not Found - Find Garage & Yard Sale"
+          description="This sale may have expired or been removed."
+          path={`/sale/${id}`}
+          noIndex
+        />
         <Navbar />
         <main className="flex-grow flex items-center justify-center px-6 py-24">
           <div className="text-center">
