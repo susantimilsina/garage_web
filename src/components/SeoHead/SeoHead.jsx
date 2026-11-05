@@ -30,7 +30,8 @@ const SeoHead = ({
       : null;
 
   return (
-    <Helmet>
+    // defer={false}: don't wait for a painted frame, because some crawlers may never paint one
+    <Helmet defer={false}>
       <title>{title}</title>
       <meta name="description" content={description} />
       <link rel="canonical" href={url} />
