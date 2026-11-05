@@ -3,12 +3,12 @@
     "apps": [],
     "details": [
       {
-        "appID": "74YXVWLRGR.com.garageyard.garageyardsale",
+        "appID": "74YXVWLRGR.com.sale.garageyard",
         "paths": ["/sale/*"]
       }
     ]
   },
   "webcredentials": {
-    "apps": ["74YXVWLRGR.com.garageyard.garageyardsale"]
+    "apps": ["74YXVWLRGR.com.sale.garageyard"]
   }
 }
