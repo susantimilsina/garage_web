@@ -7,6 +7,7 @@ import {
   renderSitemap,
   renderStatePage,
 } from "./seo-pages.mjs";
+import { buildGuides, renderGuidePage, renderGuidesIndex } from "./guides.mjs";
 
 const API_URL = process.env.SEO_API_URL || "https://api.findgarageandyardsale.com/api/v1/garage/yard/sales/";
 const PER_PAGE = 100;
@@ -59,10 +60,18 @@ const main = async () => {
       paths.push(city.path);
     }
   }
+
+  const guides = buildGuides(listings, states);
+  await writePage(outDir, "/guides/", renderGuidesIndex(guides, today));
+  paths.push("/guides/");
+  for (const guide of guides) {
+    await writePage(outDir, guide.path, renderGuidePage(guide, today));
+    paths.push(guide.path);
+  }
   await writeFile(join(outDir, "sitemap.xml"), renderSitemap([...CORE_PATHS, ...paths]));
 
   const cityCount = states.reduce((sum, state) => sum + state.cities.length, 0);
-  console.log(`SEO pages: ${listings.length} listings, ${states.length} states, ${cityCount} cities`);
+  console.log(`SEO pages: ${listings.length} listings, ${states.length} states, ${cityCount} cities, ${guides.length} guides`);
 };
 
 main().catch((error) => {
