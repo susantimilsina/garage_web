@@ -49,7 +49,7 @@ const jsonLd = (data) =>
 
 const titleCase = (text) => text.toLowerCase().replace(/(^|[\s\-'.])([a-z])/g, (m, sep, c) => sep + c.toUpperCase());
 
-const saleDates = (listing) =>
+export const saleDates = (listing) =>
   (listing.available_time_slots || [])
     .map((slot) => slot.date)
     .filter((date) => /^\d{4}-\d{2}-\d{2}/.test(date || ""))
@@ -179,7 +179,7 @@ export const buildLocations = (listings, today) => {
   return states.sort((a, b) => a.name.localeCompare(b.name));
 };
 
-const absolute = (path) => `${SITE_URL}${path}`;
+export const absolute = (path) => `${SITE_URL}${path}`;
 
 const nearbyCities = (city, states) => {
   const candidates = states.flatMap((state) => state.cities).filter((other) => other.path !== city.path);
@@ -313,7 +313,7 @@ const eventSchema = (listing, stateCode) => {
   };
 };
 
-const breadcrumbSchema = (crumbs) => ({
+export const breadcrumbSchema = (crumbs) => ({
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   itemListElement: crumbs.map((crumb, index) => ({
@@ -324,7 +324,7 @@ const breadcrumbSchema = (crumbs) => ({
   })),
 });
 
-const faqSchema = (items) => ({
+export const faqSchema = (items) => ({
   "@context": "https://schema.org",
   "@type": "FAQPage",
   mainEntity: items.map((item) => ({
@@ -398,10 +398,18 @@ details p{margin:0;padding:0 16px 14px;color:#524342}
 .foot{background:#255099;color:#fff;margin-top:48px;padding:24px 0;font-size:14px}
 .foot a{color:#fff;margin-right:16px;white-space:nowrap;display:inline-block;padding:2px 0}
 .foot p{margin:8px 0 0;color:rgba(255,255,255,.85)}
+.band-link{color:#fff;text-decoration:underline}
+.prose{max-width:720px}
+.prose p,.prose li{font-size:17px}
+.prose ol,.prose ul{padding-left:22px}
+.prose li{margin-bottom:8px}
+.prose h2{margin-top:32px}
+.toc{background:#fff;border-radius:14px;padding:16px 20px;box-shadow:0 1px 6px rgba(38,36,55,.1);margin-top:24px}
+.toc ul{margin:8px 0 0;padding-left:20px}
 @media(max-width:480px){h1{font-size:26px}.nav-links .hide-sm{display:none}}
 `;
 
-const layout = ({ title, description, path, crumbs, body, schemas }) => `<!DOCTYPE html>
+export const layout = ({ title, description, path, crumbs, body, schemas }) => `<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -439,15 +447,15 @@ ${schemas.map(jsonLd).join("\n")}
 ${body}
 </main>
 <footer class="foot"><div class="wrap">
-<a href="/sales">Find Sales</a><a href="/garage-sales/">Browse by Location</a><a href="/privacy-policy">Privacy Policy</a><a href="/terms-and-conditions">Terms of Use</a>
+<a href="/sales">Find Sales</a><a href="/garage-sales/">Browse by Location</a><a href="/guides/">Guides</a><a href="/privacy-policy">Privacy Policy</a><a href="/terms-and-conditions">Terms of Use</a>
 <p>Find Garage and Yard Sale. Free to browse and free to post.</p>
 </div></footer>
 </body>
 </html>
 `;
 
-const postSaleHtml = `<section class="band"><h2>Post your own sale for free</h2>
-<p>Reach local buyers by adding your sale in the Find Garage and Yard Sale app.</p>
+export const postSaleHtml = `<section class="band"><h2>Post your own sale for free</h2>
+<p>Reach local buyers by adding your sale in the Find Garage and Yard Sale app. <a class="band-link" href="/guides/how-to-post-a-garage-sale-online-free/">See how it works</a>.</p>
 <a class="btn" href="${escapeHtml(APP_STORE_URL)}">Get it on iPhone</a><a class="btn" href="${escapeHtml(PLAY_STORE_URL)}">Get it on Android</a></section>`;
 
 const statsHtml = (place, summary) => {
@@ -466,7 +474,7 @@ const statsHtml = (place, summary) => {
   return `<section><h2>Garage sale activity in ${escapeHtml(place)}</h2><div class="stats">${tiles.join("")}</div>${categories}</section>`;
 };
 
-const faqHtml = (items) =>
+export const faqHtml = (items) =>
   `<section><h2>Frequently asked questions</h2>${items
     .map((item) => `<details><summary>${escapeHtml(item.question)}</summary><p>${escapeHtml(item.answer)}</p></details>`)
     .join("")}</section>`;
@@ -492,7 +500,7 @@ const itemListSchema = (name, path, upcoming, stateCode) => ({
 
 const updatedHtml = (today) => `<p class="updated">Last updated ${formatDate(today)}</p>`;
 
-const heroHtml = (heading, answer, today) => `<h1>${escapeHtml(heading)}</h1>
+export const heroHtml = (heading, answer, today) => `<h1>${escapeHtml(heading)}</h1>
 <p class="answer">${escapeHtml(answer)}</p>
 ${updatedHtml(today)}
 </div>`;
