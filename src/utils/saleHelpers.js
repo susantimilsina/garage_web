@@ -107,6 +107,7 @@ export const formatAllTimeSlots = (slotsOrSale) => {
       month: "short",
       day: "numeric",
       year: "numeric",
+      timeZone: "UTC",
     });
   return sorted.map((slot) => {
     const date = slot?.date ?? slot?.start_date;
@@ -141,6 +142,7 @@ export const formatSaleDates = (slotsOrSale) => {
       month: "short",
       day: "numeric",
       year: "numeric",
+      timeZone: "UTC",
     });
   const startTime = formatTime12h(first?.start_time);
   const endTime = formatTime12h(first?.end_time);
@@ -169,7 +171,12 @@ export const getDefaultDateRange = () => {
   const today = new Date();
   const start = new Date(today);
   start.setDate(start.getDate() - 10);
-  const fmt = (d) => d.toISOString().split("T")[0];
+  const fmt = (d) => {
+    const y = d.getFullYear();
+    const m = String(d.getMonth() + 1).padStart(2, "0");
+    const day = String(d.getDate()).padStart(2, "0");
+    return `${y}-${m}-${day}`;
+  };
   return {
     startDate: fmt(start),
     endDate: fmt(today),
