@@ -15,12 +15,6 @@ export default function ImageCarousel() {
     { url: intro3, title: "Mobile Screen 3" },
   ];
 
-  // Preload images to reduce blinking
-  slides.forEach((slide) => {
-    const img = new Image();
-    img.src = slide.url;
-  });
-
   return (
     <div className="w-full">
       <Swiper
@@ -47,6 +41,12 @@ export default function ImageCarousel() {
             <img
               src={slide.url}
               alt={slide.title}
+              width={440}
+              height={934}
+              // The first slide is usually the largest thing on screen, so it loads first
+              loading={index === 0 ? "eager" : "lazy"}
+              fetchpriority={index === 0 ? "high" : "auto"}
+              decoding="async"
               className="w-full h-auto max-h-[320px] sm:max-h-[400px] md:max-h-[450px] object-fit rounded-2xl shadow-lg"
             />
           </SwiperSlide>

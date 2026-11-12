@@ -78,6 +78,9 @@ const Footer = () => {
                 <img
                   src={play_store}
                   alt="Get Find Garage and Yard Sale on Google Play"
+                  width={178}
+                  height={60}
+                  loading="lazy"
                   className="h-10 w-auto object-contain"
                 />
               </a>
@@ -90,6 +93,9 @@ const Footer = () => {
                 <img
                   src={app_store}
                   alt="Download Find Garage and Yard Sale on the App Store"
+                  width={178}
+                  height={60}
+                  loading="lazy"
                   className="h-10 w-auto object-contain"
                 />
               </a>

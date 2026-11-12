@@ -1,7 +1,6 @@
 import { useEffect, useState, useCallback, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
-import confetti from "canvas-confetti";
-import logo from "../assets/logo.png";
+import logo from "../assets/logo_96.png";
 
 const Navbar = () => {
   const lastConfettiRef = useRef(0);
@@ -12,12 +11,13 @@ const Navbar = () => {
     const rect = document.querySelector("[data-find-sales]")?.getBoundingClientRect();
     const x = rect ? (rect.left + rect.width / 2) / window.innerWidth : 0.5;
     const y = rect ? (rect.top + rect.height / 2) / window.innerHeight : 0.2;
-    confetti({
+    // Loaded on first use, so it isn't in the code every visitor downloads up front
+    import("canvas-confetti").then(({ default: confetti }) => confetti({
       particleCount: 80,
       spread: 70,
       origin: { x, y },
       colors: ["#BC2032", "#368841", "#995524", "#255099", "#FFC4CB"],
-    });
+    }));
   }, []);
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
@@ -149,6 +149,8 @@ const Navbar = () => {
             <img
               src={logo}
               alt="Find Garage and Yard Sale"
+              width={48}
+              height={48}
               className="h-12 w-12 object-cover rounded-lg"
             />
           </Link>
