@@ -1,6 +1,6 @@
 import play_store from "../assets/play_store.png";
 import app_store from "../assets/app_store.png";
-import qr_code from "../assets/qr_code.jpg";
+import qr_code from "../assets/qr_code_288.webp";
 import { APP_STORE_URL, PLAY_STORE_URL } from "../common/constants";
 
 const DownloadApp = () => {

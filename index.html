@@ -3,6 +3,18 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+    <script>
+      // The first carousel image is the home page's largest element. Start it now
+      // instead of after the app's JavaScript runs.
+      if (location.pathname === "/") {
+        var heroImage = document.createElement("link");
+        heroImage.rel = "preload";
+        heroImage.as = "image";
+        heroImage.href = "/hero/slider_1.webp";
+        heroImage.setAttribute("fetchpriority", "high");
+        document.head.appendChild(heroImage);
+      }
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <!-- One request for both families. The site uses Merriweather 700 and 900 only. -->

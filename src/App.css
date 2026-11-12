@@ -1,3 +1,19 @@
 .swiper-slide {
   transition: opacity 0.5s ease-in-out;
 }
+
+/* Until Swiper starts, size slides the way its breakpoints will, so the
+   carousel doesn't render full-width slides and then shrink them. */
+@media (min-width: 768px) {
+  .swiper-container:not(.swiper-initialized) .swiper-slide {
+    width: calc((100% - 24px) / 2);
+    margin-right: 24px;
+  }
+}
+@media (min-width: 1024px) {
+  .swiper-container:not(.swiper-initialized) .swiper-slide {
+    /* Measured against Swiper's own sizing at this breakpoint */
+    width: calc((100% - 96px) / 3);
+    margin-right: 32px;
+  }
+}
