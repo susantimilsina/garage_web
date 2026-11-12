@@ -1,11 +1,14 @@
 import "./App.css";
+import { lazy, Suspense } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./Home/Home";
-import PrivacyPolicy from "./PrivacyPolicy/PrivacyPolicy";
-import TermsAndConditions from "./TermsAndConditions/TermsAndConditions";
 import ErrorPage from "./ErrorPage/ErrorPage";
-import SalesList from "./pages/SalesList/SalesList";
-import SaleDetail from "./pages/SaleDetail/SaleDetail";
+
+// Other pages load on demand, so the home page doesn't download their code
+const PrivacyPolicy = lazy(() => import("./PrivacyPolicy/PrivacyPolicy"));
+const TermsAndConditions = lazy(() => import("./TermsAndConditions/TermsAndConditions"));
+const SalesList = lazy(() => import("./pages/SalesList/SalesList"));
+const SaleDetail = lazy(() => import("./pages/SaleDetail/SaleDetail"));
 
 const router = createBrowserRouter([
   {
@@ -43,7 +46,11 @@ const router = createBrowserRouter([
 ]);
 
 const App = () => {
-  return <RouterProvider router={router} />;
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-white" />}>
+      <RouterProvider router={router} />
+    </Suspense>
+  );
 };
 
 export default App;

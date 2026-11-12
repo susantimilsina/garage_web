@@ -18,6 +18,7 @@ const DownloadApp = () => {
               title="Find Garage and Yard Sale app demo video"
               src="https://player.vimeo.com/video/1042070258?dnt=1&title=0&byline=0&portrait=0&sidedock=0&color=ffffff"
               className="absolute top-0 left-0 w-full h-full border-0 rounded-xl"
+              loading="lazy"
               allow="autoplay"
             />
           </div>
@@ -44,6 +45,9 @@ const DownloadApp = () => {
                 <img
                   src={play_store}
                   alt="Get Find Garage and Yard Sale on Google Play"
+                  width={178}
+                  height={60}
+                  loading="lazy"
                   className="h-12 w-auto object-contain"
                 />
               </a>
@@ -56,6 +60,9 @@ const DownloadApp = () => {
                 <img
                   src={app_store}
                   alt="Download Find Garage and Yard Sale on the App Store"
+                  width={178}
+                  height={60}
+                  loading="lazy"
                   className="h-12 w-auto object-contain"
                 />
               </a>
@@ -68,6 +75,9 @@ const DownloadApp = () => {
                 <img
                   src={qr_code}
                   alt="QR code to download Find Garage and Yard Sale app"
+                  width={144}
+                  height={144}
+                  loading="lazy"
                   className="w-36 h-36 object-contain"
                 />
               </div>
