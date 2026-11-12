@@ -1,9 +1,10 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
-import intro1 from "../assets/sliders/slider_1.jpg";
-import intro2 from "../assets/sliders/slider_2.jpg";
-import intro3 from "../assets/sliders/slider_3.jpg";
+// Served from public/ under fixed names, so index.html can start the first one downloading early
+const intro1 = "/hero/slider_1.webp";
+const intro2 = "/hero/slider_2.webp";
+const intro3 = "/hero/slider_3.webp";
 // import intro4 from "../assets/sliders/slider_4.png";
 // import intro5 from "../assets/sliders/5.jpg";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
@@ -45,6 +46,8 @@ export default function ImageCarousel() {
               height={934}
               // The first slide is usually the largest thing on screen, so it loads first
               loading={index === 0 ? "eager" : "lazy"}
+              // React 18 only renders this attribute in lowercase
+              // eslint-disable-next-line react/no-unknown-property
               fetchpriority={index === 0 ? "high" : "auto"}
               decoding="async"
               className="w-full h-auto max-h-[320px] sm:max-h-[400px] md:max-h-[450px] object-fit rounded-2xl shadow-lg"
