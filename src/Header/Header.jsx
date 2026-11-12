@@ -20,7 +20,10 @@ const Header = () => {
           </p>
         </div>
 
-        <div className="flex-1 order-1 lg:order-2 mb-8 lg:mb-0">
+        {/* On wide screens the carousel takes up to 768px from the first paint.
+            Left to size itself, Swiper widened it in steps after load and
+            pushed the section below down each time. */}
+        <div className="flex-1 lg:flex-[0_1_768px] lg:min-w-0 order-1 lg:order-2 mb-8 lg:mb-0">
           <div className="w-full max-w-2xl lg:max-w-3xl mx-auto">
             <ImageCarousel />
           </div>
