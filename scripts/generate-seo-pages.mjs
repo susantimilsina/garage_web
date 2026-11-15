@@ -4,6 +4,7 @@ import {
   buildLocations,
   renderCityPage,
   renderDirectoryPage,
+  renderNotFoundPage,
   renderSitemap,
   renderStatePage,
 } from "./seo-pages.mjs";
@@ -68,6 +69,7 @@ const main = async () => {
     await writePage(outDir, guide.path, renderGuidePage(guide, today));
     paths.push(guide.path);
   }
+  await writeFile(join(outDir, "404.html"), renderNotFoundPage());
   await writeFile(join(outDir, "sitemap.xml"), renderSitemap([...CORE_PATHS, ...paths]));
 
   const cityCount = states.reduce((sum, state) => sum + state.cities.length, 0);

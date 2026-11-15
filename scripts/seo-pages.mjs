@@ -406,18 +406,23 @@ details p{margin:0;padding:0 16px 14px;color:#524342}
 .prose h2{margin-top:32px}
 .toc{background:#fff;border-radius:14px;padding:16px 20px;box-shadow:0 1px 6px rgba(38,36,55,.1);margin-top:24px}
 .toc ul{margin:8px 0 0;padding-left:20px}
+.table-wrap{overflow-x:auto;margin:16px 0}
+.prose table{width:100%;border-collapse:collapse;background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 1px 6px rgba(38,36,55,.1)}
+.prose th,.prose td{text-align:left;padding:10px 14px;border-bottom:1px solid #eee;vertical-align:top}
+.prose th{background:#fdf1e8}
+.prose tr:last-child td{border-bottom:0}
 @media(max-width:480px){h1{font-size:26px}.nav-links .hide-sm{display:none}}
 `;
 
-export const layout = ({ title, description, path, crumbs, body, schemas }) => `<!DOCTYPE html>
+export const layout = ({ title, description, path, crumbs, body, schemas, robots = "index, follow" }) => `<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${escapeHtml(title)}</title>
 <meta name="description" content="${escapeHtml(description)}">
-<meta name="robots" content="index, follow">
-<link rel="canonical" href="${absolute(path)}">
+<meta name="robots" content="${robots}">
+${robots.startsWith("noindex") ? "" : `<link rel="canonical" href="${absolute(path)}">`}
 <link rel="icon" href="/favicon.ico">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Find Garage and Yard Sale">
@@ -453,6 +458,29 @@ ${body}
 </body>
 </html>
 `;
+
+// Served by Amplify with a 404 status for addresses that don't exist
+export const renderNotFoundPage = () =>
+  layout({
+    title: "Page not found | Find Garage and Yard Sale",
+    description: "This page doesn't exist. Find garage and yard sales near you, or browse sales by location.",
+    path: "/404.html",
+    robots: "noindex, follow",
+    crumbs: [
+      { name: "Home", path: "/" },
+      { name: "Page not found", path: "/404.html" },
+    ],
+    body: `<h1>Page not found</h1>
+<p class="answer">We couldn't find that page. It may have moved, or the address may be mistyped.</p>
+</div>
+<section><div class="grid">
+<a class="card" href="/sales"><h3>Find Sales</h3><span class="place-count">Search upcoming garage and yard sales</span></a>
+<a class="card" href="/garage-sales/"><h3>Browse by Location</h3><span class="place-count">Sales by state and city</span></a>
+<a class="card" href="/guides/"><h3>Guides</h3><span class="place-count">How to find, price, and post sales</span></a>
+<a class="card" href="/"><h3>Home</h3><span class="place-count">Go to the home page</span></a>
+</div></section>`,
+    schemas: [],
+  });
 
 export const postSaleHtml = `<section class="band"><h2>Post your own sale for free</h2>
 <p>Reach local buyers by adding your sale in the Find Garage and Yard Sale app. <a class="band-link" href="/guides/how-to-post-a-garage-sale-online-free/">See how it works</a>.</p>
