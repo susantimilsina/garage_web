@@ -60,6 +60,41 @@ export const nationalStats = (listings) => {
   };
 };
 
+const listingText = (listing) => `${listing.title || ""} ${listing.description || ""}`.toLowerCase();
+
+// What sellers wrote about prices and payment in their own listings
+export const pricingStats = (listings) => {
+  const texts = listings.map(listingText);
+  const count = (pattern) => texts.filter((text) => pattern.test(text)).length;
+  const priced = texts.filter((text) => /\$\s?\d/.test(text));
+  // Each listing counts once per dollar amount it mentions
+  const amounts = tally(priced.flatMap((text) => [...new Set([...text.matchAll(/\$\s?(\d+)(?!\d|[.,]\d)/g)].map((m) => m[1]))]));
+  return {
+    topPrice: ranked(amounts)[0]?.[0] ?? "1",
+    listings: listings.length,
+    priced: priced.length,
+    // $1 on its own, or prices in cents, such as "50¢" or "50 cents"
+    oneDollarShare: percent(priced.filter((text) => /\$\s?(0|1)(?!\d|,\d)|\d+\s?(¢|cents)/.test(text)).length, priced.length || 1),
+    fillABag: count(/fill[\s-]+(a|your|the)?[\s-]*(grocery |walmart |plastic )?bag/),
+    haggling: count(/\bobo\b|negotiable|make an offer|best offer|make me an offer/),
+    mustGo: count(/everything must go|priced to sell|must go/),
+    digital: count(/venmo|zelle|cash ?app|paypal|apple pay|credit cards?|debit cards?|tap to pay|accept(s|ing)? cards?|cards? accepted/),
+  };
+};
+
+const PRICE_TABLE = [
+  ["Adult clothing", "$1 to $5", "More for coats, boots, and brand names with tags"],
+  ["Kids' clothing", "50¢ to $3", "Bundle by size to sell faster"],
+  ["Paperback books", "25¢ to $1", "Hardcovers $1 to $3"],
+  ["DVDs, CDs, and video games", "$1 to $3", "Recent video games $5 to $15"],
+  ["Toys", "50¢ to $5", "Complete sets in the box sell for more"],
+  ["Kitchenware and dishes", "$1 to $5", "Sell matching sets together"],
+  ["Small appliances", "$5 to $20", "Plug them in so buyers can see they work"],
+  ["Tools", "$2 to $20", "Power tools sell well, so price them higher"],
+  ["Furniture", "$10 to $100 or more", "Around 20% to 30% of retail for good condition"],
+  ["Costume jewelry", "$1 to $5", "Fine jewelry is worth getting appraised first"],
+];
+
 const statsSentence = (stats) => {
   const [first, second, third] = stats.days;
   return `In ${stats.listings} sales listed on Find Garage and Yard Sale, ${first.share}% of sale days were on a ${first.day}, ${second.share}% on a ${second.day}, and ${third.share}% on a ${third.day}.`;
@@ -199,9 +234,72 @@ ${appButtons}
   ],
 });
 
+const priceGuide = (stats, pricing) => ({
+  slug: "how-to-price-garage-sale-items",
+  title: "How to Price Garage Sale Items",
+  answer:
+    `Price most items at 10% to 30% of what they cost new, mark every item or table clearly, and keep prices low and round. $${pricing.topPrice} is the most common price sellers list on Find Garage and Yard Sale.`,
+  body: () => `<div class="prose">
+<nav class="toc" aria-label="On this page"><strong>On this page</strong><ul>
+<li><a href="#rules">Basic rules</a></li><li><a href="#guide">Price guide by item</a></li><li><a href="#sellers">What sellers on Find Garage and Yard Sale charge</a></li><li><a href="#day">On the day</a></li></ul></nav>
+<h2 id="rules">Basic rules</h2>
+<ul>
+<li><strong>Start at 10% to 30% of the new price.</strong> Use the top of that range for items in great condition and the bottom for worn ones.</li>
+<li><strong>Keep prices round.</strong> 25¢, 50¢, $1, $5, and $10 make change easy and speed up checkout.</li>
+<li><strong>Mark everything.</strong> Use stickers, masking tape, or a sign for each table. Many buyers won't ask, and unmarked items often don't sell.</li>
+<li><strong>Group cheap items.</strong> A sign saying "everything on this table $1" saves you time, and so does a box of free items.</li>
+<li><strong>Check before you price high.</strong> For anything you think is valuable, such as antiques, collectibles, or fine jewelry, look up recent sold prices online first.</li>
+<li><strong>Remember your goal.</strong> If you want things gone, price to sell. Anything left over has to go back in the house.</li>
+</ul>
+<h2 id="guide">Price guide by item</h2>
+<p>These are typical starting prices for items in good, used condition. Prices vary by area, so adjust for your neighborhood.</p>
+<div class="table-wrap"><table>
+<thead><tr><th scope="col">Item</th><th scope="col">Typical price</th><th scope="col">Tip</th></tr></thead>
+<tbody>${PRICE_TABLE.map(([item, price, tip]) => `<tr><td>${escapeHtml(item)}</td><td>${escapeHtml(price)}</td><td>${escapeHtml(tip)}</td></tr>`).join("")}</tbody>
+</table></div>
+<h2 id="sellers">What sellers on Find Garage and Yard Sale charge</h2>
+<p>Of ${pricing.listings} sales listed on Find Garage and Yard Sale, ${pricing.priced} mention prices in their listing. ${pricing.oneDollarShare}% of those advertise items at $1 or less, and $${pricing.topPrice} is the price they mention most often.</p>
+<ul>
+<li><strong>${pricing.mustGo} listings</strong> say things like "everything must go" or "priced to sell".</li>
+<li><strong>${pricing.fillABag} listings</strong> offer a "fill a bag" deal, where buyers pay one price for a bag of items.</li>
+<li><strong>${pricing.haggling} listings</strong> invite offers or say prices are negotiable.</li>
+<li><strong>${pricing.digital} listings</strong> mention payment apps or cards, such as Venmo or Zelle, as well as cash.</li>
+</ul>
+<p>Mentioning prices and payment options in your listing tells buyers what to expect before they arrive. See <a href="/guides/how-to-post-a-garage-sale-online-free/">how to post your sale for free</a>.</p>
+<h2 id="day">On the day</h2>
+<ul>
+<li><strong>Expect to haggle.</strong> Many buyers will offer less, so price slightly above your lowest acceptable amount.</li>
+<li><strong>Bring change.</strong> Have plenty of $1 and $5 bills and some coins.</li>
+<li><strong>Take payment apps if you can.</strong> Fewer people carry cash, and an app can save a sale.</li>
+<li><strong>Cut prices late in the day.</strong> A half-price or "fill a bag" deal in the last hours clears what's left.</li>
+<li><strong>Plan for leftovers.</strong> Arrange a donation pickup, or list larger items again for your next sale.</li>
+</ul>
+${appButtons}
+</div>`,
+  faq: [
+    {
+      question: "How much should I charge at a garage sale?",
+      answer: "Start at 10% to 30% of the item's new price, depending on condition. Most clothes, books, toys, and kitchen items sell for $1 to $5.",
+    },
+    {
+      question: "What is the most common garage sale price?",
+      answer: `$${pricing.topPrice}. It's the price mentioned most often in the ${pricing.priced} listings on Find Garage and Yard Sale that include prices, and ${pricing.oneDollarShare}% of them advertise items at $1 or less.`,
+    },
+    {
+      question: "Should I price every item?",
+      answer: "Yes, or price by table with a clear sign. Many buyers won't ask about an unmarked item.",
+    },
+    {
+      question: "How do I price furniture at a garage sale?",
+      answer: "Around 20% to 30% of the retail price for pieces in good condition. Solid wood and well-known brands can go higher.",
+    },
+  ],
+});
+
 export const buildGuides = (listings, states) => {
   const stats = nationalStats(listings);
-  return [postGuide(stats), findGuide(stats, states)].map((guide) => ({
+  const pricing = pricingStats(listings);
+  return [postGuide(stats), findGuide(stats, states), priceGuide(stats, pricing)].map((guide) => ({
     ...guide,
     path: `/guides/${guide.slug}/`,
   }));
